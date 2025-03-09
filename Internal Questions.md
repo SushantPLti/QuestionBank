@@ -1,0 +1,162 @@
+Spring boot and microservices
+
+
+- Relational and Non-relational DB?
+- What happens during server startup?
+- Bean life cycle?
+-  OAuth ?
+- How to read properties file during server startup ?
+- Fetch data out of DB using JAVA on the basis of customer id (customer id common in both)
+- What is JPA ?
+- Annotations in Spring boot?
+- Diff between Java based Singleton bean & Spring based singleton bean?
+- @Bean v/s autowired ?
+- How do you do Authentication using the API Gateway?
+- Why do we use stream?
+- Diff b/w map and flatMap in stream?
+- Primary vs Qualifier ?
+- What is memory leak and how to avoid it?
+- How API Gateway works?
+- How to avoid a class to get loaded in spring boot start?
+- Authentication and authorization?
+- trace ID and Span ID?
+- How service discovery happens?
+- Fault tolerance?
+- if its RDBMS or NonRDMS how do you improve performance?
+- Actuator ?
+- try , catch , finally?
+- What kind of support you were provided such L1, L2, L3? What is your day-to-day activity?
+- What kind of issues you were handled? How to handle issue if it is escalated by client?
+- What is Agile methodology? How does it differ from SDLC?
+- In Springboot, what are the key component you consider when creating RestAPI?
+- Which version of Java you used? And what are the features you used? Are you familiar with higher version of ja- ?
+- What are the steps you followed when ticket raised by client?
+- How to optimize the query? 
+- What is index? And how index help to optimize the query?
+- What is difference between subquery and join?
+- What is materialized view? How does it differ from view?
+- Give me any example where you face challenges and how you handle this?
+- Asking about which tools and version you are used?
+- Deployment tools like CICD pipeline
+- Java 8 all features 
+- lambda expression
+- functional interface
+- Stream API- Find second highest salary java code
+- HashMap, Concurrenthashmap
+- Spring boot annotations
+- 2 database configuration
+- Process of -Development to till deployment UAT
+- Jenkins, 
+- Kuberneties- check error log
+- splunk
+- openAPI-Swagger
+- SQL 3rd Highest Salary dynamic query
+- What is Security Manager in Java 8 ? &  two more Question on Security Manager
+- On Microservices
+- Difference between Abstract Class & Interface ? 
+- Difference between List & Set
+- What is Synchronisation
+- Showing Code - What is issue & How to resolve or fixed.
+- What is change detection?
+- How to change detection works? and strategies? & manual change detection?
+- What is Dependency Injection? How DI works in Angular?
+
+
+SQL
+
+-  Let's say you're administering an SQL database system for a school. The 
+-   The existing database is already in place when you arrive, and has a large
+-   Amount of existing data. The scheme is provided below.
+-  Design a query that, for every student, tells us their ID, name, and them
+-  primary teacher's name. You should include all students in the result, even
+-   if they do not have a primary teacher.
+- 1.How you troubleshoot and bug fixing in Springboot Microservices? Give me any example.
+- Q2. Have you involved in Springboot API designing?
+- Q3 Describe about Microservice architecture?
+- Q4. How microservice API call instances in term of Service Discovery?
+- Q5. How can you use Service Discovery? How to achieve this?
+- Q6. Suppose we need to consume some API for process from different system for our mobile app, then how can you - nicate with them?
+- Q7. Do you have any cloud experience?
+- Q8. Do you have any experience in Kubernate?
+- Q9. How annotation work in springboot?
+- Q10. When you required to create service class?
+- Q11. Spring AOP
+- Q12. What is LocalThread?
+- Q13. Share one code and asking about result?
+- Q14. Share one service class code and asking about what’s wrong in code and how to fixed it?
+- Q15. What is the approach to fixed the issue when raised by client?
+- Q16. Have you involved in sprint activity?
+- Q17. Have you got a chance to play a role as scrum master?
+- Q18. Asking about product backlog?
+- Q19. Any idea about OWASP / RASP / DOS vs DDOS
+- Microservices
+- API management
+- SpringBoot API
+- Agile Methodology
+- Risk management
+- Post api to save Employee data using spring boot application
+- @transactional Annotation
+- Customize query in repository layer
+- Adhar validation
+- How exceptional handle in spring boot
+- Authentication  & authorization
+- Spring boot security hoiw we will integrate
+- Can we use two db in one service
+- How we can save data in different table
+-    Introduce yourself with work experience and tech stack
+-    Have you worked on any cloud technologies
+-    Starting with java questions... What do you know about access modifiers
+-   What are immutable objects and how do you create a custom immutable class
+-    How can I prevent inheritance in java
+- ypes of design patterns and briefly describe any one
+- Write a java program to create singleton class
+-  What do you know about spring and spring boot frameworks
+-  Different ways of bean dependency injection
+- Scope of beans in spring with short description
+-   Difference between lazy loading and eager loading
+- How do you implement authentication and authorisation in spring boot
+- Jwt tokens: what are they and their composition, implementation
+-  Why are JWT secure?
+- Resilience in microservices, Circuit breakers
+- find bugs in the classes And few stream API programs to be written
+-    Post api to save Employee data using spring boot application
+- @transactional Annotation
+-   Custimise query in repository layer
+-  Adhar validation
+-    How exceptional handle in spring boot
+-   Authitication  & authorization
+- pring boot security hoiw we will integrate
+-   Can we use two db in one service
+-  How we can save data in diffeternt table
+
+
+Java
+
+-   What are the different java 8 features that you have used in current project? 
+-   What are the functional interfaces?
+-   What are Intermediate operations and Terminal operations in stream?
+- From the list of strings find strings which are starting with number.
+- What are the key features introduced in Java 8?
+-  Lambda Expressions
+- How does the Stream API work and what are its benefits
+- How do default and static methods in interfaces enhance Java 8
+- What are method references and how do they differ from lambda expressions
+- How does the new Date and Time API in Java 8 improve over the old Date and Calendar classes.
+- What are some common pitfalls when using Java 8 features and how can they be avoided
+- Multithreading in Java
+- Executer framework – fork and join, callable, runnable 
+- Design patterns in java 
+- Static keyword in Java – class, Methos and variable meanings 
+- Serialization, Synchornization, 
+- Transient variables and when can be used
+- HashMap changes in Java 8
+- Memory improvement in java 8
+- Java 8 Stream API coding questions related to sorting and grouping
+- What is thread safe mechanism
+- Singleton Design Pattern
+- Write a sample Singleton Design Pattern for handling thread safe
+- How will you handle exceptions in SpringMVC application
+- Function Component Vs Class Component
+- Write a sample function component and explain
+-  Write a react code to implement counter application
+- Write code to make a API call using fetch and axios

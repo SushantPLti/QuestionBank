@@ -1,0 +1,321 @@
+Core Java
+---------
+0. OOPS
+1. JVM Arcitecture (JIT Compiler, Interpreter, Garbage Collector)
+2. ClassLoader
+3. Thread (What is thread, Lifecycle and State, Deadlock, Thread-Scheduler, Daemon Thread, Thread Pool, Syncronization, Thread Communication)
+4. Exception (ClassNotFoundException, NoClassDefFoundError)
+5. Serialization
+6. JDK, JRE (Arcitecture)
+7. Design Pattern
+8. final, finally, finalize (Difference)
+9. Collection (Diff HashMap and HashTable, Ligacy)
+10. Concurrent Collection
+11. ArrayList, Vector, HashMap, HashSet, HashTable
+12. Failfast, FailSafe
+13. Generic Collection
+14. Lambda Expression
+15. List, Set, Map, ArrayList, HashSet, HashMap, HashTable, TreeSet, TreeMap, Red Black Tree, LinkedArrayList, LinkedHashSet, LinkedHashMap, Stack,
+Queue, Priority Queue -> Binary Heap
+Sorted Set, Sorted Map, Array difference LinkedList
+IS-A and HAS-A Relationship
+Comparator and Comparable
+Difference between Clonable and Copy
+Load Factor of all Collection framework
+Java 8 enhancement on collections like HashMap
+LinkedList, LinkedSet and Other Collections With there respective DS
+Sorting algo with O(n)
+Searching algo with O(n)
+Internal Working of Collections
+check indexOf in arraylist for Customized Classes by defining equal method
+Java mutable and immutable
+Inheritance for final and static
+Learn Legacy
+Object and Class lavel thread in Java
+HashSet for String and StringBuffer
+Stream API usage, to count the duplicate, remove the duplicate ?
+Detail abt jar, war and ear.
+HashMap in detail with Enhancement, Collection in detail and implementation of DS
+OOPS concept
+Arrays with different problem
+1. SOLID design principle in details,
+2. Composition, Association and Agreegation difference
+3. Exception in Detail
+4. Serialization, DeSerialization,ExterSerialization, searialVersionUID
+5. Polymorphism in detail
+6. Clonning in detail
+7. Generic and WildCard in Generic 
+8. Collection
+8.1 ArrayList vs LinkedList (better in all prespective)
+8.2 HashMap, HashTable and ConcurrentHashMap difference 
+8.3 Internal working of HashMap,ConcurrentHashMap and LinkedHashMap
+9. Concurrent in detail
+10. Equal and == symbol
+11. Java 8 Enhancement
+12. Intermediate and terminal operation
+13. Predicate and ByPredicate
+14. Map and HashMap 
+15. What are Optional
+16. Diff of staic and default methods 
+17. duplicate from a list using java 8
+18. Average from a given list of integer
+19. lowercase and uppercase conversion
+20. first non repeatative character
+21. occurance of each character in a string
+22. check a number is strongest or not.
+23. Design Pattern
+23.1 Three category of Pattern
+23.2 Each one from them
+24. Create a thread safe singlton using double check locking
+25. To create a thread
+26. Diff between Ways and singleton
+27. What r serializa, reflection and cloning 
+28. Use of Enum in singleton
+29. Diff Factory 
+31. Multithred, wait, notify, notifyAll 
+32. Executor thread group 
+33. Thread pool (Types of Thread Pool in detail)
+34. Fork and Join Pull
+35. BlockingQue
+Check whether a string contain a special, an alphanumeric, a separate basis?
+JVM acitechture 
+finalize method.
+difference type of garbage collector
+define heap size 
+XMX and SMX
+- Synchronization, multithreading, executive framework
+-When collision will occur in hashmap?
+-Any difference in implementation of hashmap and how it is different in java series?
+-Worked on multi threading?
+- What are the ways of threading?
+-How to override method in threading?
+-Whether T1.run will show output or T1.start? which tyoe of exception it will throw?
+-In microservices how you can call two API?
+-Any pre defined library classes used?
+-Worked on java 1.8?
+-Key features of Java 1.8?
+-Class A extend B,C whether it is possible in Java?
+-What is default and static method -can you give examples?
+-which problem can be solved by using this?
+-Can you override default method?
+-Write simple statement on stream api.
+to print 100 users having 3 attributes?
+-print name of users having user ID
+-Difference between runtime and compile time exception?
+-Difference between final, finally, and finalize?
+Singleton class any ways achieve and different questions on singleton.
+String code question like “the sun rise on the east” to change like string of each word should change like upper case. Output: The Sun Rise on the East
+Collection part went like all classes and interfaces
+
+Data Structure
+--------------
+1. Recursion -> Partially completed
+2. Linked List
+3. Tree
+4. Graph
+5. Videos of Leet Code
+6. Sorted Linked List to Balanced BST
+
+Spring
+-------
+1. Spring MVC (Arcitecture, Hibernate)
+2. Spring Boot (Status Code, Actuator, Diff between SpringBootApplication and Spring anotation, JPA, Security, Logging)
+3. Microservice (Arcitecture, Entire Project Overview)
+Interceptor in Spring
+Git
+Scope in MVC
+mechanism to refresh JWT token
+How Hibernate is implemented in Jpa Repo in spring boot?
+Revision needed for Microservice existing project ?
+30. Messaging
+30.1 topic vs Que (Kafka -> Offset, Defining Partition, role of Zookeeper)
+30.2 wht are consumer group 
+30.3 retaintion policy
+Rest Concepts > Best Practices, IdimPorted vs non IdeamPorted
+Controller vs RestController.
+Pagination and Versioning
+Springboot:
+-What is dependency injection in springboot?
+-What are the difference method to achieve this?
+-Ever used @bin annotation?
+-is this a way of creating injection?
+-Ever used scope annotation?
+-Used @qualifier annotation?
+- Which security protocol you are using?
+-Ever creatd jwd token?
+-how you can intercept request in application?
+-if you are calling service A to service B, you have shared jwd token to B then whether it will check security?
+-What are 2 component of jwd tocken?
+-Ever decoded Jwd tocken?
+-Write simple springboot app for social media, how you will write?
+-What are the various way to connect database?
+-Ever written custom query?
+-Do you know about patch?
+-What is put request?
+-Generic exception handlers?
+-Which version of springboot used?
+-Any catching mechanism used?
+-Worked on composite key?
+-What are the differnt annotation you are using?
+-using app property/
+- Ever used stagger?
+-How validation are happening?
+-Ever used distributed tracing?
+-Ever used spring AVP?
+-Knowledge on Docker, Kubernetes?
+-Worked on GIT hub?
+-What is cherry pick?
+-What is Rebase?
+-What will happen if you have Rebase?
+Springboot internally working
+Rest Api working
+Junit testing
+Mockitho working
+Production suport
+Basic bugg fixes and trouble shooting
+
+---
+
+
+DBMS
+----
+Join, Index, ACID, Query, Normalization, Hashing, DDL, DML, DCl, TCL, DQL, Keys (with some examples on INNER JOIN)
+get last 3rd height salary of employee -> use the concept ORDER BY ..... DESC, LIMIT and OFFSET
+1. Treat single table as a People, Father and Mother with relation table which contain the mapping for id of both the Relation and People table.
+2. Check how Elastic searching greping data from Logstash and how it's pushing to Kibana.
+Indexing, Normalization, Join, Normal Queries
+Primary and Foriegn Key in Table via Jpa or entity
+select the max salary of each department with the employee name
+SELECT DeptID, EmpName, Salary FROM EmpDetails WHERE (DeptID,Salary) IN (SELECT DeptID, MAX(Salary) as Salary FROM EmpDetails GROUP BY DeptID)
+All type of Join
+Indexing -> Type of Indexes
+second heighest salary of employee 
+lazy and eager loading
+relationships
+GROUP BY and HAVING clause
+-Write SQL query for employee ID, Employee name, and 2nd largest Salary.
+
+
+Angular
+-------
+What is DOM and BOM
+BrowserModule
+@NgModule
+BrowserModule
+What is decorator
+
+Binding In Angular:
+https://www.tutorialspoint.com/angular8/angular8_data_binding.html
+
+Angular Arcitecture:
+https://stackoverflow.com/questions/58765187/how-does-an-angular-application-starts-up
+
+use of injectable in angular
+The @Injectable() decorator specifies that Angular can use this class in the DI system. 
+The metadata, providedIn: 'root' , means that the HeroService is visible throughout the application.
+
+
+Docker
+------
+Use CMD or ENTRYPOINT
+
+Targets
+-------
+1. To practice the Lead Code Problem.
+2. Recursion, Dynamic Programming, Graph, Tree
+
+
+JUNIT
+@Before, @After, @BeforeAll, @AfterAll
+@Mock and @InjectMock
+
+
+EJB
+---
+1. Create a EJB Project
+2. Deploy it in JBoss container.
+3. Learn Thread, how we can prevent our programme from Race Condition (Thread Safe)
+In how many ways we can safe our thread from collision in detail.
+4. JBOSS -> arcitecture, features, Modes, file structure, controllers
+
+
+JBOSS -> arcitecture, features, Modes, file structure, controllers
+Detail abt jar, war and ear
+EJB,RMI/RCP,Messaging,Transaction
+
+OSI Model and HTTP
+
+Race Condition in Multi Threading
+Thread Safe in Java
+https://www.geeksforgeeks.org/thread-safety-and-how-to-achieve-it-in-java/
+
+difference between switch and if else , why switch is faster and why it is used over if else
+https://softwareengineering.stackexchange.com/questions/154500/how-is-a-switch-statement-better-than-a-series-of-if-statements
+and it used hashcode internally
+
+features comes in Java 7 and Java 8
+http://www.differencebetween.net/technology/difference-between-java-7-and-java-8/
+
+
+Create three threads which can do increament accordingly in a loop like below
+Thread 1 -> 1
+Thread 2 -> 2
+Thread 3 -> 3
+....
+....
+....
+
+-try{
+int number=100/10;
+return 10;
+}catch(Exp e){
+return 5;
+}finally{
+return 0;
+}
+What is the output????
+
+ 
+Which one is correct:
+1..
+ArrayList l1=new ArrayList() 
+List l1=new List()
+List l1=new ArrayList()
+ArrayList l1= new List()
+
+2.. What will be the output and why?
+Thread t1=new Thread(new Runnable(){
+@override
+public void run(){
+syso("Hello World")
+}
+})
+
+3… Whats the difference
+t1.run()
+t1.start()
+t1.start()
+
+4.. Output and why?
+private int calculate(){
+try{
+int number=100/0;
+return 10;
+ }catch(Exp e){
+return 5;
+}finally{
+return 0;
+}
+}
+
+5..
+Class A extends B,C
+Class A implemets I1,I2
+I1 interface
+void calculate()
+ I2 interface
+ void calculate()
+
+6..Write a code:
+String input="AAABBDDACCC"
+output="3A2B2D1A3C"

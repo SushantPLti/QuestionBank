@@ -1,207 +1,98 @@
+## Singleton design pattern
+
 1️⃣ What is the Singleton Design Pattern? 
 
-Singleton ensures that only one instance of a class exists in the entire application and provides a global access point to that instance. 
-
-In simple words: 
-“Create one object, reuse it everywhere.” 
-
-This definition and intent are consistently described in standard Java pattern references such as Refactoring Guru, Baeldung, and DigitalOcean tutorials [refactoring.guru], [baeldung.com], [digitalocean.com] 
-
- 
+- Singleton ensures that only one instance of a class exists in the entire application and provides a global access point to that instance. 
+- In simple words: 
+“Create one object, reuse it everywhere.”  
 
 2️⃣ Why do we need Singleton? (Problem it solves) 
 
-Problem 
+#### Problem 
+- Some objects: 
+    - Are expensive to create 
+    - Represent shared resources 
+    - Must remain consistent across the app 
 
-Some objects: 
+- Examples: 
+    - Database connection manager 
+    - Configuration loader 
+    - Logger 
+    - Cache manager 
 
-Are expensive to create 
+- Without Singleton: 
+    - Multiple instances → wasted memory 
+    - Inconsistent state 
+    - Hard‑to‑debug bugs 
 
-Represent shared resources 
-
-Must remain consistent across the app 
-
-Examples: 
-
-Database connection manager 
-
-Configuration loader 
-
-Logger 
-
-Cache manager 
-
-Without Singleton: 
-
-Multiple instances → wasted memory 
-
-Inconsistent state 
-
-Hard‑to‑debug bugs 
-
-Singleton solves this by controlling object creation [digitalocean.com] 
-
- 
+- Singleton solves this by controlling object creation [digitalocean.com] 
 
 3️⃣ Basic Singleton implementation (Classic Java) 
 
-✅ Lazy Initialization (NOT thread‑safe) 
+#### Lazy Initialization (NOT thread‑safe) 
 
-Java 
+        public class Singleton {
 
-public class Singleton { 
- 
+            private static Singleton instance;
 
- 
+            private Singleton() {
+                // private constructor
+            }
 
-private static Singleton instance; 
- 
-
- 
-
-private Singleton() { 
- 
-
-// private constructor 
- 
-
-} 
- 
-
- 
-
-public static Singleton getInstance() { 
- 
-
-if (instance == null) { 
- 
-
-instance = new Singleton(); 
- 
-
-} 
- 
-
-return instance; 
- 
-
-} 
- 
-
-} 
- 
-
-Show more lines 
+            public static Singleton getInstance() {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+                return instance;
+            }
+        }
 
 ✅ Creates object only when needed 
 ❌ Not safe in multithreaded environment 
 
-This limitation is documented in Java pattern tutorials [digitalocean.com], [refactoring.guru] 
-
- 
+This limitation is documented in Java pattern tutorials [digitalocean.com], [refactoring.guru]  
 
 4️⃣ Thread‑safe Singleton (important in real apps) 
 
-✅ Synchronized method 
+#### Synchronized method 
 
-Java 
+        public class Singleton {
 
-public class Singleton { 
- 
+            private static Singleton instance;
 
- 
+            private Singleton() {}
 
-private static Singleton instance; 
- 
-
- 
-
-private Singleton() {} 
- 
-
- 
-
-public static synchronized Singleton getInstance() { 
- 
-
-if (instance == null) { 
- 
-
-instance = new Singleton(); 
- 
-
-} 
- 
-
-return instance; 
- 
-
-} 
- 
-
-} 
- 
-
-Show more lines 
+            public static synchronized Singleton getInstance() {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+                return instance;
+            }
+        }
 
 ✅ Thread‑safe 
 ❌ Slower due to synchronization overhead 
 
  
+#### Double‑Checked Locking (recommended classic approach) 
 
-✅ Double‑Checked Locking (recommended classic approach) 
+        public class Singleton {
 
-Java 
+            private static volatile Singleton instance;
 
-public class Singleton { 
- 
+            private Singleton() {}
 
- 
-
-private static volatile Singleton instance; 
- 
-
- 
-
-private Singleton() {} 
- 
-
- 
-
-public static Singleton getInstance() { 
- 
-
-if (instance == null) { 
- 
-
-synchronized (Singleton.class) { 
- 
-
-if (instance == null) { 
- 
-
-instance = new Singleton(); 
- 
-
-} 
- 
-
-} 
- 
-
-} 
- 
-
-return instance; 
- 
-
-} 
- 
-
-} 
- 
-
-Show more lines 
+            public static Singleton getInstance() {
+                if (instance == null) {
+                    synchronized (Singleton.class) {
+                        if (instance == null) {
+                            instance = new Singleton();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
 
 ✅ Thread‑safe 
 ✅ Better performance 
@@ -209,46 +100,20 @@ Show more lines
 
 This approach is widely cited in Java concurrency‑safe singleton examples [digitalocean.com] 
 
- 
-
 5️⃣ Best Singleton in Java: Bill Pugh approach ⭐ 
 
-Java 
+        public class Singleton {
 
-public class Singleton { 
- 
+            private Singleton() {}
 
- 
+            private static class Helper {
+                private static final Singleton INSTANCE = new Singleton();
+            }
 
-private Singleton() {} 
- 
-
- 
-
-private static class Helper { 
- 
-
-private static final Singleton INSTANCE = new Singleton(); 
- 
-
-} 
- 
-
- 
-
-public static Singleton getInstance() { 
- 
-
-return Helper.INSTANCE; 
- 
-
-} 
- 
-
-} 
- 
-
-Show more lines 
+            public static Singleton getInstance() {
+                return Helper.INSTANCE;
+            }
+        }
 
 ✅ Lazy 
 ✅ Thread‑safe 
@@ -257,33 +122,16 @@ Show more lines
 
 This is recommended by Baeldung and other advanced Java sources [baeldung.com] 
 
- 
 
 6️⃣ Enum Singleton (most robust) 
 
-Java 
+        public enum Singleton {
+            INSTANCE;
 
-public enum Singleton { 
- 
-
-INSTANCE; 
- 
-
- 
-
-public void doSomething() { 
- 
-
-System.out.println("Singleton using enum"); 
- 
-
-} 
- 
-
-} 
- 
-
-Show more lines 
+            public void doSomething() {
+                System.out.println("Singleton using enum");
+            }
+        }
 
 ✅ Thread‑safe 
 ✅ Serialization‑safe 
@@ -291,304 +139,103 @@ Show more lines
 
 Joshua Bloch (Effective Java) strongly recommends this approach, and it’s referenced in multiple Java design pattern guides [digitalocean.com] 
 
- 
-
 7️⃣ Singleton in Spring Boot (VERY IMPORTANT for you) 
 
 👉 Spring beans are Singleton by default 
 
-Java 
+        @Service
+        public class OrderService {
+        }
 
-@Service 
- 
-
-public class OrderService { 
- 
-
-} 
- 
-
-Show more lines 
-
-Only one instance per Spring container 
-
-Managed by Spring IoC 
-
-No need to write Singleton code manually 
+- Only one instance per Spring container 
+- Managed by Spring IoC 
+- No need to write Singleton code manually 
 
 Spring’s singleton behavior is clearly documented in Spring pattern references [baeldung.com], [geeksforgeeks.org] 
 
 ❗ Important clarification 
 
-Spring Singleton ≠ JVM Singleton 
-It means: 
-
-One instance per Spring ApplicationContext 
+- Spring Singleton ≠ JVM Singleton 
+- It means: **One instance per Spring ApplicationContext**
 
  
-
 8️⃣ Real‑world Spring examples of Singleton 
 
-Use case 
-
-How 
-
-Service layer 
-
-@Service 
-
-DAO / Repository 
-
-@Repository 
-
-Config beans 
-
-@Configuration 
-
-Logging 
-
-Singleton logger 
-
-Cache 
-
-One cache manager 
+        Use case            How 
+        Service layer       @Service 
+        DAO / Repository    @Repository 
+        Config beans        @Configuration 
+        Logging             Singleton logger 
+        Cache               One cache manager 
 
 Spring uses Singleton heavily along with Factory, Proxy, and Template patterns internally [baeldung.com] 
 
- 
-
 9️⃣ When NOT to use Singleton ❌ 
 
-Avoid Singleton when: 
-
-Object holds user‑specific state 
-
-Needs multiple configurations 
-
-Makes testing hard (tight coupling) 
-
-Used just “because it exists” 
+#### Avoid Singleton when: 
+- Object holds user‑specific state 
+- Needs multiple configurations 
+- Makes testing hard (tight coupling) 
+- Used just “because it exists” 
 
 Overuse of Singleton is a known anti‑pattern in large systems [refactoring.guru] 
-
  
-
 🔟 Singleton – Interview‑ready summary 
 
 ✅ Definition 
 Ensures only one instance and global access 
 
 ✅ Key benefits 
-
-Controlled object creation 
-
-Shared resource management 
+- Controlled object creation 
+- Shared resource management 
 
 ✅ Best implementations 
-
-Enum Singleton 
-
-Bill Pugh 
+- Enum Singleton 
+- Bill Pugh 
 
 ✅ Spring context 
-
 Beans are Singleton by default 
 
 ✅ Common pitfalls 
+- Thread safety 
+- Overuse 
+- Hidden dependencies 
 
-Thread safety 
 
-Overuse 
 
-Hidden dependencies 
-
- 
-
-
-
-Factory Design Pattern (Java)
-1️⃣ What is the Factory Design Pattern?
-The Factory Design Pattern is a creational pattern that:
-
-Creates objects without exposing the creation logic to the client, and
-returns objects using a common interface or abstract class.
-
-In simple words:
-
-Instead of using new everywhere, you ask a factory to give you the object.
-
-This definition is consistent across standard Java references such as GeeksForGeeks, Baeldung, and Refactoring Guru [geeksforgeeks.org], [baeldung.com], [refactoring.guru]
-
-2️⃣ What problem does Factory solve?
-❌ Problem without Factory
-Javaif (type.equals("UPI")) {    return new UpiPayment();} else if (type.equals("CARD")) {    return new CardPayment();}Show more lines
-Problems:
-
-Tight coupling (new everywhere)
-Large if-else or switch
-Violates Open/Closed Principle
-Hard to extend and test
-
-These issues are explicitly mentioned in multiple Java Factory explanations [geeksforgeeks.org], [javaguides.net]
-
-✅ Solution with Factory
-
-Move object creation logic to one place
-Client depends only on interface
-Easy to add new implementations
-
-
-3️⃣ Simple Factory Pattern (most common in projects)
-Step 1: Common interface
-Javapublic interface Payment {    void pay();}Show more lines
-Step 2: Implementations
-Javapublic class UpiPayment implements Payment {    public void pay() {        System.out.println("Paid using UPI");    }}public class CardPayment implements Payment {    public void pay() {        System.out.println("Paid using Card");    }}Show more lines
-Step 3: Factory class
-Javapublic class PaymentFactory {    public static Payment getPayment(String type) {        if ("UPI".equalsIgnoreCase(type)) {            return new UpiPayment();        } else if ("CARD".equalsIgnoreCase(type)) {            return new CardPayment();        }        throw new IllegalArgumentException("Invalid payment type");    }}Show more lines
-Step 4: Client code
-JavaPayment payment = PaymentFactory.getPayment("UPI");payment.pay();Show more lines
-✅ Client never uses new
-✅ Creation logic is hidden
-✅ Matches textbook Factory definition [geeksforgeeks.org]
-
-4️⃣ Factory Method Pattern (GoF version)
-Definition
-
-Defines an interface for creating an object, but lets subclasses decide which class to instantiate.
-
-This is the official GoF Factory Method pattern [geeksforgeeks.org], [baeldung.com]
-Structure
-
-Product → Interface
-ConcreteProduct → Implementations
-Creator → Abstract factory
-ConcreteCreator → Decides object type
-
-Example (simplified)
-Javapublic abstract class NotificationFactory {    public abstract Notification createNotification();}Show more lines
-Javapublic class EmailFactory extends NotificationFactory {    public Notification createNotification() {        return new EmailNotification();    }}Show more lines
-Used when:
-
-Subclasses control object creation
-Framework-level extensibility is needed
-
-
-5️⃣ Factory in Spring Boot (VERY IMPORTANT)
-✅ Spring uses Factory pattern internally
-Examples:
-
-BeanFactory
-ApplicationContext
-FactoryBean<T>
-
-Spring’s bean creation mechanism is based on Factory concepts [baeldung.com], [refactoring.guru]
-
-✅ Custom Factory with Spring
-Java@Componentpublic class NotificationFactory {    @Autowired    private List<Notification> notifications;    public Notification getNotification(String type) {        return notifications.stream()                .filter(n -> n.getType().equals(type))                .findFirst()                .orElseThrow();    }}Show more lines
-✅ No if-else
-✅ Open for extension
-✅ Enterprise‑ready design
-
-6️⃣ Real‑world Java examples using Factory
-Factory pattern is used in core Java APIs such as:
-
-Calendar.getInstance()
-NumberFormat.getInstance()
-ResourceBundle.getBundle()
-
-These are documented examples of Factory usage in Java libraries [refactoring.guru]
-
-7️⃣ When should you use Factory? ✅
-Use Factory when:
-
-Object creation logic is complex
-Multiple implementations exist
-Type is decided at runtime
-You want loose coupling
-
-These use cases are explicitly listed in Java Factory references [geeksforgeeks.org]
-
-8️⃣ When NOT to use Factory ❌
-Avoid Factory when:
-
-Only one implementation exists
-Object creation is simple
-Adds unnecessary complexity
-
-
-9️⃣ Factory vs Singleton (quick comparison)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-AspectFactorySingletonPurposeObject creation logicSingle instanceInstancesMultiple possibleOnly oneUsageDecouplingShared resource
-
-🔟 Interview‑ready summary
-✅ Factory Pattern
-
-Creational pattern
-Hides object creation
-Returns interface type
-Promotes loose coupling
-Widely used in Java & Spring
-
-✅ Spring
-
-Uses Factory internally
-BeanFactory is a real Factory
-
-
-
-
-Builder Design Pattern (Java)
+## Builder Design Pattern
 1️⃣ What is the Builder Design Pattern?
-The Builder Design Pattern is a creational design pattern that:
-
-Separates the construction of a complex object from its representation,
-allowing the same construction process to create different representations.
-
-In simple terms:
-
-Build an object step‑by‑step instead of passing many parameters at once.
-
-This definition is consistent across Baeldung, GeeksforGeeks, and Refactoring Guru [baeldung.com], [geeksforgeeks.org], [refactoring.guru]
+- The Builder Design Pattern is a creational design pattern that:
+    Separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
+- In simple terms, **Build an object step‑by‑step instead of passing many parameters at once.**
 
 2️⃣ What problem does Builder solve?
-❌ Problem: Telescoping constructors
-JavaUser user = new User(    "Sushant", "Poman", 30,    "sushant@mail.com", "Pune",    true, "ARCHITECT");Show more lines
-Problems:
+#### Problem: Telescoping constructors
 
-Hard to read
-Easy to mix parameter order
-Many optional fields
-Difficult to maintain
-Breaks immutability if setters are used
+        User user = new User(
+            "Sushant", "Poman", 30,
+            "sushant@mail.com", "Pune",
+            true, "ARCHITECT"
+        );
+
+Problems:
+- Hard to read
+- Easy to mix parameter order
+- Many optional fields
+- Difficult to maintain
+- Breaks immutability if setters are used
 
 These problems are explicitly highlighted in Builder pattern guides [geeksforgeeks.org], [dev.to]
 
-✅ Solution: Builder Pattern
-JavaUser user = User.builder()        .firstName("Sushant")        .lastName("Poman")        .email("sushant@mail.com")        .city("Pune")        .build();Show more lines
+#### Solution: Builder Pattern
+
+        User user = User.builder()
+        .firstName("Sushant")
+        .lastName("Poman")
+        .email("sushant@mail.com")
+        .city("Pune")
+        .build();
+        
 ✅ Readable
 ✅ Only required fields
 ✅ Immutable object
@@ -603,629 +250,825 @@ build() → Final immutable object
 Refactoring Guru explicitly explains Builder as step‑by‑step construction without forcing a common interface [refactoring.guru]
 
 4️⃣ Classic Builder implementation (most used in Java)
-✅ Step 1: Product class
-Javapublic class User {    private final String firstName;    private final String lastName;    private final String email;    private final String city;    private User(Builder builder) {        this.firstName = builder.firstName;        this.lastName = builder.lastName;        this.email = builder.email;        this.city = builder.city;    }    public static class Builder {        private String firstName;        private String lastName;        private String email;        private String city;        public Builder firstName(String firstName) {            this.firstName = firstName;            return this;        }        public Builder lastName(String lastName) {            this.lastName = lastName;            return this;        }        public Builder email(String email) {            this.email = email;            return this;        }        public Builder city(String city) {            this.city = city;            return this;        }        public User build() {            return new User(this);        }    }}Show less
-✅ Step 2: Client usage
-JavaUser user = new User.Builder()        .firstName("Sushant")        .lastName("Poman")        .email("sushant@mail.com")        .city("Pune")        .build();Show more lines
+
+#### Step 1: Product class
+
+        public class User {
+
+            private final String firstName;
+            private final String lastName;
+            private final String email;
+            private final String city;
+
+            private User(Builder builder) {
+                this.firstName = builder.firstName;
+                this.lastName = builder.lastName;
+                this.email = builder.email;
+                this.city = builder.city;
+            }
+
+            public static class Builder {
+                private String firstName;
+                private String lastName;
+                private String email;
+                private String city;
+
+                public Builder firstName(String firstName) {
+                    this.firstName = firstName;
+                    return this;
+                }
+
+                public Builder lastName(String lastName) {
+                    this.lastName = lastName;
+                    return this;
+                }
+
+                public Builder email(String email) {
+                    this.email = email;
+                    return this;
+                }
+
+                public Builder city(String city) {
+                    this.city = city;
+                    return this;
+                }
+
+                public User build() {
+                    return new User(this);
+                }
+            }
+        }
+
+#### Step 2: Client usage
+
+        User user = new User.Builder()
+        .firstName("Sushant")
+        .lastName("Poman")
+        .email("sushant@mail.com")
+        .city("Pune")
+        .build();
+
 This structure is exactly how Builder is shown in Baeldung and GeeksforGeeks [baeldung.com], [geeksforgeeks.org]
 
 5️⃣ Why Builder is better than setters?
 
+        Approach                    Problem
+        Setters                     Mutable, unsafe, partial objects
+        Constructors                Too many parameters
+        Builder                     ✅ Immutable, readable, safe
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ApproachProblemSettersMutable, unsafe, partial objectsConstructorsToo many parametersBuilder✅ Immutable, readable, safe
 Builder also ensures atomic object creation, avoiding inconsistent state under concurrency [geeksforgeeks.org]
 
 6️⃣ Builder in real Java APIs (VERY IMPORTANT)
-Builder pattern is used in:
-
-StringBuilder
-StringBuffer
-ByteBuffer
-Locale.Builder
-Java 11 HttpRequest.Builder
+#### Builder pattern is used in:
+- StringBuilder
+- StringBuffer
+- ByteBuffer
+- Locale.Builder
+- Java 11 HttpRequest.Builder
 
 These are documented real‑world usages of Builder in core Java [refactoring.guru]
 
 7️⃣ Builder in Spring Framework (you already use it!)
-Spring heavily uses Builder:
-
-RestTemplateBuilder
-BeanDefinitionBuilder
-WebClient.Builder
+#### Spring heavily uses Builder:
+- RestTemplateBuilder
+- BeanDefinitionBuilder
+- WebClient.Builder
 
 This aligns with enterprise‑level object construction needs [javatechonline.com]
 
 8️⃣ Lombok @Builder (modern practical usage)
-Java@Builderpublic class Order {    private String orderId;    private String customer;    private double amount;}Show more lines
-JavaOrder order = Order.builder()        .orderId("ORD123")        .customer("HSBC")        .amount(5000)        .build();Show more lines
+
+        @Builder
+        public class Order {
+            private String orderId;
+            private String customer;
+            private double amount;
+        }
+
+        Order order = Order.builder()
+        .orderId("ORD123")
+        .customer("HSBC")
+        .amount(5000)
+        .build();
+
 ✅ Less boilerplate
 ✅ Same Builder concept
 ✅ Very common in Spring Boot projects
+
 Mentioned as a practical alternative in modern Java Builder guides [javatechonline.com]
 
 9️⃣ When should you use Builder? ✅
-Use Builder when:
-
-Object has many optional fields
-Immutability is required
-Readability matters
-Construction involves validation or steps
+#### Use Builder when:
+- Object has many optional fields
+- Immutability is required
+- Readability matters
+- Construction involves validation or steps
 
 These conditions are explicitly listed in Builder references [geeksforgeeks.org], [javaspring.net]
 
 🔟 When NOT to use Builder ❌
-Avoid Builder when:
-
-Object has only 2–3 fields
-Construction is simple
-Overhead is unnecessary
+#### Avoid Builder when:
+- Object has only 2–3 fields
+- Construction is simple
+- Overhead is unnecessary
 
 
 🔁 Builder vs Factory (quick clarity)
 
+        Aspect              Builder                     Factory
+        Purpose             Step‑by‑step construction   Decide which object
+        Focus               HOW object is built         WHICH object to build
+        Output              Usually same type           Different implementations
+
+#### Interview‑ready summary
+- Builder is a creational pattern
+- Solves complex object construction
+- Avoids telescoping constructors
+- Produces immutable objects
+- Widely used in Java & Spring
 
 
 
-AspectBuilderFactoryPurposeStep‑by‑step constructionDecide which objectFocusHOW object is builtWHICH object to buildOutputUsually same typeDifferent implementations
+## Factory Design Pattern
 
-✅ Interview‑ready summary
+1️⃣ What is the Factory Design Pattern?
+- The Factory Design Pattern is a creational pattern that:
+    **Creates objects without exposing the creation logic to the client, and returns objects using a common interface or abstract class.**
+- In simple words:
+    **Instead of using new everywhere, you ask a factory to give you the object.**
 
-Builder is a creational pattern
-Solves complex object construction
-Avoids telescoping constructors
-Produces immutable objects
-Widely used in Java & Spring
+This definition is consistent across standard Java references such as GeeksForGeeks, Baeldung, and Refactoring Guru [geeksforgeeks.org], [baeldung.com], [refactoring.guru]
+
+2️⃣ What problem does Factory solve?
+❌ Problem without Factory
+
+        if (type.equals("UPI")) {
+            return new UpiPayment();
+        } else if (type.equals("CARD")) {
+            return new CardPayment();
+        }
+
+#### Problems:
+- Tight coupling (new everywhere)
+- Large if-else or switch
+- Violates Open/Closed Principle
+- Hard to extend and test
+
+These issues are explicitly mentioned in multiple Java Factory explanations [geeksforgeeks.org], [javaguides.net]
+
+✅ Solution with Factory
+- Move object creation logic to one place
+- Client depends only on interface
+- Easy to add new implementations
+
+
+3️⃣ Simple Factory Pattern (most common in projects)
+#### Step 1: Common interface
+
+        public interface Payment {
+            void pay();
+        }
+
+#### Step 2: Implementations
+
+        public class UpiPayment implements Payment {
+            public void pay() {
+                System.out.println("Paid using UPI");
+            }
+        }
+
+        public class CardPayment implements Payment {
+            public void pay() {
+                System.out.println("Paid using Card");
+            }
+        }
+
+#### Step 3: Factory class
+
+        public class PaymentFactory {
+            public static Payment getPayment(String type) {
+                if ("UPI".equalsIgnoreCase(type)) {
+                    return new UpiPayment();
+                } else if ("CARD".equalsIgnoreCase(type)) {
+                    return new CardPayment();
+                }
+                throw new IllegalArgumentException("Invalid payment type");
+            }
+        }
+
+#### Step 4: Client code
+
+        Payment payment = PaymentFactory.getPayment("UPI");
+        payment.pay();
+✅ Client never uses new
+✅ Creation logic is hidden
+✅ Matches textbook Factory definition [geeksforgeeks.org]
+
+4️⃣ Factory Method Pattern (GoF version)
+#### Definition
+Defines an interface for creating an object, **but lets subclasses decide which class to instantiate.**
+
+#### Structure
+- Product → Interface
+- ConcreteProduct → Implementations
+- Creator → Abstract factory
+- ConcreteCreator → Decides object type
+
+#### Example (simplified)
+
+        public abstract class NotificationFactory {
+            public abstract Notification createNotification();
+        }
+
+        public class EmailFactory extends NotificationFactory {
+            public Notification createNotification() {
+                return new EmailNotification();
+            }
+        }
+
+Used when:
+- Subclasses control object creation
+- Framework-level extensibility is needed
+
+
+5️⃣ Factory in Spring Boot (VERY IMPORTANT)
+#### Spring uses Factory pattern internally
+Examples:
+- BeanFactory
+- ApplicationContext
+- FactoryBean<T>
+
+Spring’s bean creation mechanism is based on Factory concepts [baeldung.com], [refactoring.guru]
+
+#### Custom Factory with Spring
+
+        @Component
+        public class NotificationFactory {
+
+            @Autowired
+            private List<Notification> notifications;
+
+            public Notification getNotification(String type) {
+                return notifications.stream()
+                        .filter(n -> n.getType().equals(type))
+                        .findFirst()
+                        .orElseThrow();
+            }
+        }
+
+✅ No if-else
+✅ Open for extension
+✅ Enterprise‑ready design
+
+6️⃣ Real‑world Java examples using Factory
+#### Factory pattern is used in core Java APIs such as:
+- Calendar.getInstance()
+- NumberFormat.getInstance()
+- ResourceBundle.getBundle()
+
+These are documented examples of Factory usage in Java libraries [refactoring.guru]
+
+7️⃣ When should you use Factory? ✅
+#### Use Factory when:
+- Object creation logic is complex
+- Multiple implementations exist
+- Type is decided at runtime
+- You want loose coupling
+
+These use cases are explicitly listed in Java Factory references [geeksforgeeks.org]
+
+8️⃣ When NOT to use Factory ❌
+#### Avoid Factory when:
+- Only one implementation exists
+- Object creation is simple
+- Adds unnecessary complexity
+
+
+9️⃣ Factory vs Singleton (quick comparison)
+
+        Aspect          Factory                 Singleton
+        Purpose         Object creation logic   Single instance
+        Instances       Multiple possible       Only one
+        Usage           Decoupling              Shared resource
+
+🔟 Interview‑ready summary
+#### Factory Pattern
+- Creational pattern
+- Hides object creation
+- Returns interface type
+- Promotes loose coupling
+- Widely used in Java & Spring
+#### Spring
+- Uses Factory internally
+- BeanFactory is a real Factory
 
 
 
 
-Abstract Factory Design Pattern (Java)
+## Abstract Factory Design Pattern
 1️⃣ What is the Abstract Factory Pattern?
-The Abstract Factory Pattern is a creational design pattern that:
-
-Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
-
-In simple terms:
-
-Factory creates one object
-Abstract Factory creates a group (family) of related objects
-
-This intent is explicitly described in enterprise design‑pattern references that explain how Abstract Factory allows creation of related object families while hiding concrete implementations [Java Commo...8031554596 | Word]
+- The Abstract Factory Pattern is a creational design pattern that:
+    Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+- In simple terms: 
+    **Factory creates one object**
+    **Abstract Factory creates a group (family) of related objects**
 
 2️⃣ Why do we need Abstract Factory?
-❌ Problem scenario (without Abstract Factory)
-Imagine you support multiple environments or multiple vendors:
+#### Problem scenario (without Abstract Factory)
+- Imagine you support multiple environments or multiple vendors:
+    - UI themes → Light / Dark
+    - Databases → MySQL / Oracle
+    - Payment systems → Indian / International
 
-UI themes → Light / Dark
-Databases → MySQL / Oracle
-Payment systems → Indian / International
+- If you use simple Factory:
+    - You’ll end up mixing incompatible objects
+    - Client code becomes messy
+    - Hard to switch entire families
 
-If you use simple Factory:
-
-You’ll end up mixing incompatible objects
-Client code becomes messy
-Hard to switch entire families
-
-This problem is highlighted in Abstract Factory explanations where families of related products must remain consistent [Java Commo...8031554596 | Word]
+This problem is highlighted in Abstract Factory explanations where families of related products must remain consistent
 
 3️⃣ Key idea (easy mental model)
-
-Abstract Factory → Creates factories
-Concrete Factory → Creates a family of objects
-Abstract Product → Common interfaces
-Concrete Product → Actual implementations
+- Abstract Factory → Creates factories
+- Concrete Factory → Creates a family of objects
+- Abstract Product → Common interfaces
+- Concrete Product → Actual implementations
 
 ✅ Ensures compatibility among related objects
 
 4️⃣ Real‑world example (Payment Gateway – Practical)
-Scenario
-You support:
-
-Domestic Payments (UPI + RuPay)
-International Payments (Visa + PayPal)
-
-You must ensure:
-
-Domestic clients never get international components
-International clients never get domestic components
-
+#### Scenario
+- You support:
+    - Domestic Payments (UPI + RuPay)
+    - International Payments (Visa + PayPal)
+- You must ensure:
+    - Domestic clients never get international components
+    - International clients never get domestic components
 
 5️⃣ Abstract Factory – Java Example
-Step 1: Abstract products
-Javapublic interface Payment {    void pay();}public interface Invoice {    void generate();}Show more lines
+#### Step 1: Abstract products
 
-Step 2: Concrete products (Domestic)
-Javapublic class UpiPayment implements Payment {    public void pay() {        System.out.println("UPI Payment");    }}public class GstInvoice implements Invoice {    public void generate() {        System.out.println("GST Invoice");    }}Show more lines
+        public interface Payment {
+            void pay();
+        }
 
-Step 3: Concrete products (International)
-Javapublic class PaypalPayment implements Payment {    public void pay() {        System.out.println("PayPal Payment");    }}public class VatInvoice implements Invoice {    public void generate() {        System.out.println("VAT Invoice");    }}Show more lines
+        public interface Invoice {
+            void generate();
+        }
 
-Step 4: Abstract Factory
-Javapublic interface PaymentFactory {    Payment createPayment();    Invoice createInvoice();}Show more lines
-This factory defines what products belong together, which is the core idea of Abstract Factory [Java Commo...8031554596 | Word]
+#### Step 2: Concrete products (Domestic)
 
-Step 5: Concrete Factories
-Javapublic class DomesticPaymentFactory implements PaymentFactory {    public Payment createPayment() {        return new UpiPayment();    }    public Invoice createInvoice() {        return new GstInvoice();    }}Show more lines
-Javapublic class InternationalPaymentFactory implements PaymentFactory {    public Payment createPayment() {        return new PaypalPayment();    }    public Invoice createInvoice() {        return new VatInvoice();    }}Show more lines
+        public class UpiPayment implements Payment {
+            public void pay() {
+                System.out.println("UPI Payment");
+            }
+        }
 
-Step 6: Client code
-JavaPaymentFactory factory = new DomesticPaymentFactory();Payment payment = factory.createPayment();Invoice invoice = factory.createInvoice();payment.pay();invoice.generate();Show more lines
+        public class GstInvoice implements Invoice {
+            public void generate() {
+                System.out.println("GST Invoice");
+            }
+        }
+
+#### Step 3: Concrete products (International)
+
+        public class PaypalPayment implements Payment {
+            public void pay() {
+                System.out.println("PayPal Payment");
+            }
+        }
+
+        public class VatInvoice implements Invoice {
+            public void generate() {
+                System.out.println("VAT Invoice");
+            }
+        }
+
+#### Step 4: Abstract Factory
+
+        public interface PaymentFactory {
+            Payment createPayment();
+            Invoice createInvoice();
+        }
+
+This factory defines what products belong together, which is the core idea of Abstract Factory.
+
+#### Step 5: Concrete Factories
+
+        public class DomesticPaymentFactory implements PaymentFactory {
+            public Payment createPayment() {
+                return new UpiPayment();
+            }
+
+            public Invoice createInvoice() {
+                return new GstInvoice();
+            }
+        }
+
+        public class InternationalPaymentFactory implements PaymentFactory {
+            public Payment createPayment() {
+                return new PaypalPayment();
+            }
+
+            public Invoice createInvoice() {
+                return new VatInvoice();
+            }
+        }
+
+#### Step 6: Client code
+
+        PaymentFactory factory = new DomesticPaymentFactory();
+
+        Payment payment = factory.createPayment();
+        Invoice invoice = factory.createInvoice();
+
+        payment.pay();
+        invoice.generate();
+
 ✅ Client is fully decoupled
 ✅ Entire family switches by changing one factory
 ✅ No concrete classes referenced
 
 6️⃣ Abstract Factory vs Factory (Very important)
 
+        Aspect                  Factory                 Abstract Factory
+        Creates                 One object              Family of objects
+        Complexity              Low                     Higher
+        Use case                Simple decisions        Multiple related products
+        Example                 Payment type            Payment + Invoice + Tax
 
-
-
-
-
-
-
-AspectFactoryAbstract FactoryCreatesOne objectFamily of objectsComplexityLowHigherUse caseSimple decisionsMultiple related productsExamplePayment typePayment + Invoice + Tax
-This distinction is emphasized in Abstract Factory best‑practice documents [Java Commo...8031554596 | Word]
+This distinction is emphasized in Abstract Factory best‑practice documents
 
 7️⃣ Abstract Factory in Spring (Enterprise relevance)
-Spring uses Abstract Factory ideas internally:
+#### Spring uses Abstract Factory ideas internally:
+- BeanFactory creates beans
+- Profiles (@Profile) switch families of beans
+- DataSource + TransactionManager combinations
 
-BeanFactory creates beans
-Profiles (@Profile) switch families of beans
-DataSource + TransactionManager combinations
+Enterprise Java documents explicitly mention Abstract Factory as a foundation for DAO and persistence abstractions 
 
-Enterprise Java documents explicitly mention Abstract Factory as a foundation for DAO and persistence abstractions [Java Commo...8031554596 | Word]
-Example (Spring Profile‑based Abstract Factory idea)
-Java@Profile("domestic")@Componentclass DomesticPaymentFactory implements PaymentFactory { }@Profile("international")@Componentclass InternationalPaymentFactory implements PaymentFactory { }Show more lines
+#### Example (Spring Profile‑based Abstract Factory idea)
+
+        @Profile("domestic")
+        @Component
+        class DomesticPaymentFactory implements PaymentFactory { }
+
+        @Profile("international")
+        @Component
+        class InternationalPaymentFactory implements PaymentFactory { }
 
 8️⃣ When should you use Abstract Factory? ✅
-Use it when:
+#### Use it when:
+- You need families of related objects
+- Switching configurations at runtime
+- Supporting multiple platforms/vendors
+- Building frameworks or libraries
 
-You need families of related objects
-Switching configurations at runtime
-Supporting multiple platforms/vendors
-Building frameworks or libraries
-
-These scenarios are described as ideal Abstract Factory use cases in enterprise design references [Java Commo...8031554596 | Word]
+These scenarios are described as ideal Abstract Factory use cases in enterprise design references
 
 9️⃣ When NOT to use Abstract Factory ❌
-Avoid it when:
-
-Only one product exists
-No related objects
-Adds unnecessary complexity
+#### Avoid it when:
+- Only one product exists
+- No related objects
+- Adds unnecessary complexity
 
 
 🔟 Interview‑ready summary
-✅ Abstract Factory Pattern
+#### Abstract Factory Pattern
+- Creational pattern
+- Creates families of related objects
+- Ensures product compatibility
+- Hides concrete implementations
+- Heavily used in frameworks
 
-Creational pattern
-Creates families of related objects
-Ensures product compatibility
-Hides concrete implementations
-Heavily used in frameworks
-
-✅ Think of it as
-
-Factory of factories
+#### Think of it as **Factory of factories**
 
 
-
-
-Explain Object Pool design pattern
-Copilot said:
-Copilot
-Below is a clear, practical, enterprise‑ready explanation of the Object Pool Design Pattern, aligned with Java, Spring Boot, concurrency, and performance‑critical systems.
-
-Object Pool Design Pattern
+## Object Pool Design Pattern
 1️⃣ What is the Object Pool Pattern?
-The Object Pool Design Pattern is a creational pattern that:
+- The Object Pool Design Pattern is a creational pattern that:
+    Manages a pool of reusable objects instead of creating and destroying them repeatedly.
+- In simple words:
+    **Create a fixed set of objects once, reuse them many times.**
 
-Manages a pool of reusable objects instead of creating and destroying them repeatedly.
-
-In simple words:
-
-Create a fixed set of objects once, reuse them many times.
-
-This pattern is commonly discussed alongside other creational patterns such as Singleton, Factory, and Builder in advanced design‑pattern learning materials that explicitly list Object Pool as a pattern used for performance optimization
-
-Creational Design Patterns in Modern C++
+This pattern is commonly discussed alongside other creational patterns such as Singleton, Factory, and Builder in advanced design‑pattern learning materials that explicitly list Object Pool as a pattern used for performance optimization.
 
 2️⃣ What problem does Object Pool solve?
-❌ Problem without Object Pool
-Creating some objects is expensive, for example:
+#### Problem without Object Pool
+- Creating some objects is expensive, for example:
+    - Database connections
+    - Thread workers
+    - Network sockets
+    - Heavy parsers or formatters
+- Without pooling:
+    - Frequent new and destroy
+    - High GC pressure
+    - Performance degradation
+    - Resource exhaustion under load
 
-Database connections
-Thread workers
-Network sockets
-Heavy parsers or formatters
-Without pooling:
-
-Frequent new and destroy
-High GC pressure
-Performance degradation
-Resource exhaustion under load
 These concerns are why Object Pool appears in performance‑focused design pattern discussions
 
-Creational Design Patterns in Modern C++
-
-✅ Solution with Object Pool
-Pre‑create objects
-Borrow when needed
-Return after use
-Reuse instead of recreating
-✅ Faster
-✅ Controlled resource usage
-✅ Predictable performance
+#### Solution with Object Pool
+- Pre‑create objects
+- Borrow when needed
+- Return after use
+- Reuse instead of recreating
+- Faster
+- Controlled resource usage
+- Predictable performance
 
 3️⃣ Core idea (mental model)
-An Object Pool has:
+#### An Object Pool has:
+- Pool → Manages objects
+- Available objects
+- In‑use objects
+- Acquire / Release operations
 
-Pool → Manages objects
-Available objects
-In‑use objects
-Acquire / Release operations
+        Client → borrow() → use object → release() → Pool
 
-
-
-Plain Text
-Client → borrow() → use object → release() → Pool
 4️⃣ Simple Java Object Pool Example
-Step 1: Pooled object
+#### Step 1: Pooled object
 
-
-
-Java
-public class Connection {
-    public void execute(String query) {
-        System.out.println("Executing: " + query);
-    }
-}
-Step 2: Object Pool
-
-
-
-Java
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ArrayBlockingQueue;
-
-public class ConnectionPool {
-
-    private final BlockingQueue<Connection> pool;
-
-    public ConnectionPool(int size) {
-        pool = new ArrayBlockingQueue<>(size);
-        for (int i = 0; i < size; i++) {
-            pool.add(new Connection());
+        public class Connection {
+            public void execute(String query) {
+                System.out.println("Executing: " + query);
+            }
         }
-    }
 
-    public Connection acquire() throws InterruptedException {
-        return pool.take(); // waits if none available
-    }
+#### Step 2: Object Pool
 
-    public void release(Connection connection) {
-        pool.offer(connection);
-    }
-}
+        import java.util.concurrent.BlockingQueue;
+        import java.util.concurrent.ArrayBlockingQueue;
 
-Show less
-Step 3: Client usage
+        public class ConnectionPool {
 
+            private final BlockingQueue<Connection> pool;
 
+            public ConnectionPool(int size) {
+                pool = new ArrayBlockingQueue<>(size);
+                for (int i = 0; i < size; i++) {
+                    pool.add(new Connection());
+                }
+            }
 
-Java
-ConnectionPool pool = new ConnectionPool(5);
+            public Connection acquire() throws InterruptedException {
+                return pool.take(); // waits if none available
+            }
 
-Connection conn = pool.acquire();
-try {
-    conn.execute("SELECT * FROM users");
-} finally {
-    pool.release(conn);
-}
+            public void release(Connection connection) {
+                pool.offer(connection);
+            }
+        }
+
+### Step 3: Client usage
+
+        ConnectionPool pool = new ConnectionPool(5);
+        Connection conn = pool.acquire();
+        try {
+            conn.execute("SELECT * FROM users");
+        } finally {
+            pool.release(conn);
+        }
+
 ✅ Limited objects
 ✅ Thread‑safe
 ✅ Reusable resources
 
 5️⃣ Object Pool vs Singleton (important)
-Aspect	Singleton	Object Pool
-Instances	Only one	Multiple
-Purpose	Shared global instance	Reusable expensive objects
-Lifecycle	Entire app	Borrow & return
-Example	Logger	DB connections
+
+        Aspect	        Singleton	            Object Pool
+        Instances	    Only one	            Multiple
+        Purpose	        Shared global instance	Reusable expensive objects
+        Lifecycle	    Entire app	            Borrow & return
+        Example	        Logger	                DB connections
+        
 6️⃣ Real‑world Java & Spring examples
-✅ Database Connection Pool
-HikariCP
-Apache DBCP
-C3P0
+#### Database Connection Pool
+- HikariCP
+- Apache DBCP
+- C3P0
+
 These are classic Object Pool implementations used in Spring Boot applications.
 
-✅ Thread Pool (ExecutorService)
+#### Thread Pool (ExecutorService)
 
-
-
-Java
-ExecutorService executor = Executors.newFixedThreadPool(10);
+        ExecutorService executor = Executors.newFixedThreadPool(10);
 Thread pools are a specialized Object Pool for threads.
 
-✅ Spring Boot usage
+#### Spring Boot usage
 When you configure:
 
-
-
-
-.properties
-spring.datasource.hikari.maximum-pool-size=10
+        spring.datasource.hikari.maximum-pool-size=10
 You are directly using the Object Pool pattern.
 
-7️⃣ When should you use Object Pool? ✅
-Use it when:
+7️⃣ When should you use Object Pool?
+#### Use it when:
+- Object creation is expensive
+- Limited resources exist
+- High concurrency is expected
+- Performance is critical
 
-Object creation is expensive
-Limited resources exist
-High concurrency is expected
-Performance is critical
 These use cases are why Object Pool is discussed in advanced creational‑pattern materials
 
-Creational Design Patterns in Modern C++
-
 8️⃣ When NOT to use Object Pool ❌
-Avoid it when:
+#### Avoid it when:
+- Objects are cheap to create
+- Objects are lightweight & stateless
+- Pool adds unnecessary complexity
+- Risk of memory leaks exists
 
-Objects are cheap to create
-Objects are lightweight & stateless
-Pool adds unnecessary complexity
-Risk of memory leaks exists
 ⚠️ Modern JVMs are fast at object creation—use pooling only when justified.
 
 9️⃣ Common pitfalls (important)
-Forgetting to return objects → resource leak
-Pool size too small → thread starvation
-Pool size too large → memory waste
-Sharing stateful objects incorrectly
+- Forgetting to return objects → resource leak
+- Pool size too small → thread starvation
+- Pool size too large → memory waste
+- Sharing stateful objects incorrectly
+
 🔟 Interview‑ready summary
-✅ Object Pool Pattern
-
-Creational pattern
-Reuses expensive objects
-Controls resource usage
-Improves performance under load
-✅ Real examples
-
-DB connection pools
-Thread pools
-Socket pools
-✅ Spring Boot
-
-HikariCP = Object Pool
-ExecutorService = Object Pool
+#### Object Pool Pattern
+- Creational pattern
+- Reuses expensive objects
+- Controls resource usage
+- Improves performance under load
+#### Real examples
+- DB connection pools
+- Thread pools
+- Socket pools
+#### Spring Boot
+- HikariCP = Object Pool
+- ExecutorService = Object Pool
 
 
-
-
-Explain Prototype design pattern
-Copilot said:
-Copilot
-Below is a clear, practical, enterprise‑ready explanation of the Prototype Design Pattern, continuing naturally from Singleton, Factory, Abstract Factory, Builder, and Object Pool.
-
-Prototype Design Pattern (Java)
+## Prototype design pattern
 1️⃣ What is the Prototype Design Pattern?
-The Prototype Design Pattern is a creational pattern that:
+- The Prototype Design Pattern is a creational pattern that:
+    Creates new objects by copying (cloning) existing objects instead of creating them from scratch.
+- In simple words:
+    **Don’t create a new object with new — clone an existing one.**
 
-Creates new objects by copying (cloning) existing objects instead of creating them from scratch.
-
-In simple words:
-
-Don’t create a new object with new — clone an existing one.
-
-This pattern is listed as one of the GoF creational patterns and is typically taught along with Factory, Builder, and Object Pool in enterprise Java design‑pattern references and training materials
-
-Design Patterns in Java: Creational
+This pattern is listed as one of the GoF creational patterns and is typically taught along with Factory, Builder, and Object Pool in enterprise Java design‑pattern references and training materials.
 
 2️⃣ What problem does Prototype solve?
-❌ Problem without Prototype
-Creating an object can be:
+#### Problem without Prototype
+- Creating an object can be:
+    - Expensive (DB calls, configuration loading)
+    - Complex (many fields, nested objects)
+    - Repetitive (same base object, small variations)
 
-Expensive (DB calls, configuration loading)
-Complex (many fields, nested objects)
-Repetitive (same base object, small variations)
-Example:
+- Example:
 
+        Report report = new Report();
+        report.loadConfigFromDB();
+        report.loadTemplates();
+        report.loadPermissions();
 
+- Doing this every time:
+    - Wastes time
+    - Increases latency
+    - Repeats the same setup logic
 
-
-Java
-Report report = new Report();
-report.loadConfigFromDB();
-report.loadTemplates();
-report.loadPermissions();
-Doing this every time:
-
-Wastes time
-Increases latency
-Repeats the same setup logic
-✅ Solution with Prototype
-Create a fully initialized object once
-Clone it whenever needed
-Modify only what’s different
+#### Solution with Prototype
+- Create a fully initialized object once
+- Clone it whenever needed
+- Modify only what’s different
 ✅ Faster
 ✅ Less boilerplate
 ✅ Cleaner design
 
 This idea—copying pre‑configured objects instead of rebuilding them—is the core intent of the Prototype pattern in Java
 
-Design Patterns in Java: Creational
-
 3️⃣ Core idea (mental model)
 
+        Original Object  →  clone()  →  New Object
 
-
-Plain Text
-Original Object  →  clone()  →  New Object
 Instead of:
 
+        new → configure → validate → initialize
 
-
-
-Plain Text
-new → configure → validate → initialize
 4️⃣ Prototype in Java (Cloneable interface)
-Step 1: Prototype interface
+#### Step 1: Prototype interface
 
+        public interface Prototype extends Cloneable {
+            Prototype clone();
+        }
 
+#### Step 2: Concrete Prototype
 
-Java
-public interface Prototype extends Cloneable {
-    Prototype clone();
-}
-Step 2: Concrete Prototype
+        public class Document implements Prototype {
 
+            private String content;
+            private String format;
 
+            public Document(String content, String format) {
+                this.content = content;
+                this.format = format;
+            }
 
-Java
-public class Document implements Prototype {
+            @Override
+            public Document clone() {
+                return new Document(this.content, this.format);
+            }
 
-    private String content;
-    private String format;
+            public void setContent(String content) {
+                this.content = content;
+            }
+        }
 
-    public Document(String content, String format) {
-        this.content = content;
-        this.format = format;
-    }
+#### Step 3: Client usage
 
-    @Override
-    public Document clone() {
-        return new Document(this.content, this.format);
-    }
+        Document original = new Document("Base Content", "PDF");
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-}
+        Document copy1 = original.clone();
+        copy1.setContent("User‑specific content");
 
-Show less
-Step 3: Client usage
+        Document copy2 = original.clone();
+        copy2.setContent("Admin‑specific content");
 
-
-
-Java
-Document original = new Document("Base Content", "PDF");
-
-Document copy1 = original.clone();
-copy1.setContent("User‑specific content");
-
-Document copy2 = original.clone();
-copy2.setContent("Admin‑specific content");
 ✅ No complex initialization
 ✅ Objects are independent
 ✅ Faster creation
 
 5️⃣ Shallow Copy vs Deep Copy (VERY IMPORTANT)
-🔹 Shallow Copy
-Copies references
-Shared internal objects
+#### Shallow Copy
+- Copies references
+- Shared internal objects
 
-
-
-Java
-@Override
-public Object clone() throws CloneNotSupportedException {
-    return super.clone();
-}
+        @Override
+        public Object clone() throws CloneNotSupportedException {
+            return super.clone();
+        }
 ❌ Risky for mutable fields
 
-🔹 Deep Copy
-Copies everything
-Fully independent objects
+#### Deep Copy
+- Copies everything
+- Fully independent objects
 
-
-
-Java
-@Override
-public Document clone() {
-    return new Document(
-        new String(this.content),
-        new String(this.format)
-    );
-}
+        @Override
+        public Document clone() {
+            return new Document(
+                new String(this.content),
+                new String(this.format)
+            );
+        }
 ✅ Safe
 ✅ Preferred in enterprise apps
 
 Understanding shallow vs deep cloning is critical when applying Prototype correctly in Java systems
 
-Design Patterns in Java: Creational
-
 6️⃣ Real‑world Java examples
-✅ Java API
-Object.clone()
-ArrayList.clone()
-HashMap.clone()
+#### Java API
+- Object.clone()
+- ArrayList.clone()
+- HashMap.clone()
+
 These APIs demonstrate Prototype behavior by creating copies instead of rebuilding objects.
 
-✅ Spring Framework use cases
-Bean definition cloning
-Template‑based object creation
-Test data setup
+#### Spring Framework use cases
+- Bean definition cloning
+- Template‑based object creation
+- Test data setup
+
 Prototype ideas are also reflected in Spring’s prototype bean scope, where a new instance is created per request (conceptually similar, though not cloning internally).
 
 7️⃣ Prototype vs Factory vs Builder (important)
-Pattern	Focus
-Factory	Decide which object
-Builder	Decide how to build
-Prototype	Copy an existing object
-8️⃣ When should you use Prototype? ✅
-Use Prototype when:
+        Pattern	            Focus
+        Factory	            Decide which object
+        Builder	            Decide how to build
+        Prototype	        Copy an existing object
 
-Object creation is expensive
-Many similar objects are needed
-Objects differ only slightly
-Performance is critical
+8️⃣ When should you use Prototype? ✅
+#### Use Prototype when:
+- Object creation is expensive
+- Many similar objects are needed
+- Objects differ only slightly
+- Performance is critical
+
 These scenarios are explicitly mentioned in creational‑pattern learning materials that include Prototype alongside Object Pool and Factory
 
-Design Patterns in Java: Creational
-
 9️⃣ When NOT to use Prototype ❌
-Avoid it when:
+#### Avoid it when:
+- Objects are simple
+- Deep copying is complex
+- Object graph is huge
+- Cloning logic becomes error‑prone
 
-Objects are simple
-Deep copying is complex
-Object graph is huge
-Cloning logic becomes error‑prone
 🔟 Common pitfalls (interview favorite)
-Forgetting deep copy → shared state bugs
-Using Cloneable blindly
-Not handling mutable fields
-Poorly defined clone contracts
+- Forgetting deep copy → shared state bugs
+- Using Cloneable blindly
+- Not handling mutable fields
+- Poorly defined clone contracts
+
 ✅ Interview‑ready summary
-✅ Prototype Pattern
 
-Creational pattern
-Creates objects by cloning
-Avoids expensive initialization
-Useful for performance optimization
+#### Prototype Pattern
+- Creational pattern
+- Creates objects by cloning
+- Avoids expensive initialization
+- Useful for performance optimization
+
 ✅ Key idea
-
-“Create once, clone many times.”
-
-
+**“Create once, clone many times.”**
 
 
 

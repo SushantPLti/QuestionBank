@@ -1,12 +1,13 @@
 ## Singleton design pattern
 
-1️⃣ What is the Singleton Design Pattern? 
+### 1️⃣ What is the Singleton Design Pattern? 
 
-- Singleton ensures that only one instance of a class exists in the entire application and provides a global access point to that instance. 
+- The Singleton Pattern is a creational design pattern that:
+    **Singleton ensures that only one instance of a class exists in the entire application and provides a global access point to that instance.** 
 - In simple words: 
-“Create one object, reuse it everywhere.”  
+    **“Create one object, reuse it everywhere.”**
 
-2️⃣ Why do we need Singleton? (Problem it solves) 
+### 2️⃣ Why do we need Singleton? (Problem it solves) 
 
 #### Problem 
 - Some objects: 
@@ -27,7 +28,7 @@
 
 - Singleton solves this by controlling object creation [digitalocean.com] 
 
-3️⃣ Basic Singleton implementation (Classic Java) 
+### 3️⃣ Basic Singleton implementation (Classic Java) 
 
 #### Lazy Initialization (NOT thread‑safe) 
 
@@ -52,7 +53,7 @@
 
 This limitation is documented in Java pattern tutorials [digitalocean.com], [refactoring.guru]  
 
-4️⃣ Thread‑safe Singleton (important in real apps) 
+### 4️⃣ Thread‑safe Singleton (important in real apps) 
 
 #### Synchronized method 
 
@@ -72,7 +73,6 @@ This limitation is documented in Java pattern tutorials [digitalocean.com], [ref
 
 ✅ Thread‑safe 
 ❌ Slower due to synchronization overhead 
-
  
 #### Double‑Checked Locking (recommended classic approach) 
 
@@ -100,7 +100,7 @@ This limitation is documented in Java pattern tutorials [digitalocean.com], [ref
 
 This approach is widely cited in Java concurrency‑safe singleton examples [digitalocean.com] 
 
-5️⃣ Best Singleton in Java: Bill Pugh approach ⭐ 
+### 5️⃣ Best Singleton in Java: Bill Pugh approach ⭐ 
 
         public class Singleton {
 
@@ -122,8 +122,7 @@ This approach is widely cited in Java concurrency‑safe singleton examples [dig
 
 This is recommended by Baeldung and other advanced Java sources [baeldung.com] 
 
-
-6️⃣ Enum Singleton (most robust) 
+### 6️⃣ Enum Singleton (most robust) 
 
         public enum Singleton {
             INSTANCE;
@@ -139,7 +138,7 @@ This is recommended by Baeldung and other advanced Java sources [baeldung.com]
 
 Joshua Bloch (Effective Java) strongly recommends this approach, and it’s referenced in multiple Java design pattern guides [digitalocean.com] 
 
-7️⃣ Singleton in Spring Boot (VERY IMPORTANT for you) 
+### 7️⃣ Singleton in Spring Boot (VERY IMPORTANT for you) 
 
 👉 Spring beans are Singleton by default 
 
@@ -159,7 +158,7 @@ Spring’s singleton behavior is clearly documented in Spring pattern references
 - It means: **One instance per Spring ApplicationContext**
 
  
-8️⃣ Real‑world Spring examples of Singleton 
+### 8️⃣ Real‑world Spring examples of Singleton 
 
         Use case            How 
         Service layer       @Service 
@@ -170,7 +169,7 @@ Spring’s singleton behavior is clearly documented in Spring pattern references
 
 Spring uses Singleton heavily along with Factory, Proxy, and Template patterns internally [baeldung.com] 
 
-9️⃣ When NOT to use Singleton ❌ 
+### 9️⃣ When NOT to use Singleton 
 
 #### Avoid Singleton when: 
 - Object holds user‑specific state 
@@ -180,36 +179,37 @@ Spring uses Singleton heavily along with Factory, Proxy, and Template patterns i
 
 Overuse of Singleton is a known anti‑pattern in large systems [refactoring.guru] 
  
-🔟 Singleton – Interview‑ready summary 
+### 🔟 Singleton – Interview‑ready summary 
 
-✅ Definition 
-Ensures only one instance and global access 
+- Definition 
+    - Ensures only one instance and global access 
 
-✅ Key benefits 
-- Controlled object creation 
-- Shared resource management 
+- Key benefits 
+    - Controlled object creation 
+    - Shared resource management 
 
-✅ Best implementations 
-- Enum Singleton 
-- Bill Pugh 
+- Best implementations 
+    - Enum Singleton 
+    - Bill Pugh 
 
-✅ Spring context 
-Beans are Singleton by default 
+- Spring context 
+    Beans are Singleton by default 
 
-✅ Common pitfalls 
-- Thread safety 
-- Overuse 
-- Hidden dependencies 
+- Common pitfalls 
+    - Thread safety 
+    - Overuse 
+    - Hidden dependencies
 
 
 
 ## Builder Design Pattern
-1️⃣ What is the Builder Design Pattern?
+
+### 1️⃣ What is the Builder Design Pattern?
 - The Builder Design Pattern is a creational design pattern that:
-    Separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
+    **Separates the construction of a complex object from its representation, allowing the same construction process to create different representations.**
 - In simple terms, **Build an object step‑by‑step instead of passing many parameters at once.**
 
-2️⃣ What problem does Builder solve?
+### 2️⃣ What problem does Builder solve?
 #### Problem: Telescoping constructors
 
         User user = new User(
@@ -241,15 +241,15 @@ These problems are explicitly highlighted in Builder pattern guides [geeksforgee
 ✅ Immutable object
 ✅ Safer & cleaner
 
-3️⃣ Core idea of Builder (easy mental model)
+### 3️⃣ Core idea of Builder (easy mental model)
 
-Product → Object being built
-Builder → Step‑by‑step construction
-build() → Final immutable object
+- Product → Object being built
+- Builder → Step‑by‑step construction
+- build() → Final immutable object
 
 Refactoring Guru explicitly explains Builder as step‑by‑step construction without forcing a common interface [refactoring.guru]
 
-4️⃣ Classic Builder implementation (most used in Java)
+### 4️⃣ Classic Builder implementation (most used in Java)
 
 #### Step 1: Product class
 
@@ -310,7 +310,7 @@ Refactoring Guru explicitly explains Builder as step‑by‑step construction wi
 
 This structure is exactly how Builder is shown in Baeldung and GeeksforGeeks [baeldung.com], [geeksforgeeks.org]
 
-5️⃣ Why Builder is better than setters?
+### 5️⃣ Why Builder is better than setters?
 
         Approach                    Problem
         Setters                     Mutable, unsafe, partial objects
@@ -319,7 +319,7 @@ This structure is exactly how Builder is shown in Baeldung and GeeksforGeeks [ba
 
 Builder also ensures atomic object creation, avoiding inconsistent state under concurrency [geeksforgeeks.org]
 
-6️⃣ Builder in real Java APIs (VERY IMPORTANT)
+### 6️⃣ Builder in real Java APIs (VERY IMPORTANT)
 #### Builder pattern is used in:
 - StringBuilder
 - StringBuffer
@@ -329,7 +329,7 @@ Builder also ensures atomic object creation, avoiding inconsistent state under c
 
 These are documented real‑world usages of Builder in core Java [refactoring.guru]
 
-7️⃣ Builder in Spring Framework (you already use it!)
+### 7️⃣ Builder in Spring Framework (you already use it!)
 #### Spring heavily uses Builder:
 - RestTemplateBuilder
 - BeanDefinitionBuilder
@@ -337,7 +337,7 @@ These are documented real‑world usages of Builder in core Java [refactoring.gu
 
 This aligns with enterprise‑level object construction needs [javatechonline.com]
 
-8️⃣ Lombok @Builder (modern practical usage)
+### 8️⃣ Lombok @Builder (modern practical usage)
 
         @Builder
         public class Order {
@@ -358,7 +358,7 @@ This aligns with enterprise‑level object construction needs [javatechonline.co
 
 Mentioned as a practical alternative in modern Java Builder guides [javatechonline.com]
 
-9️⃣ When should you use Builder? ✅
+### 9️⃣ When should you use Builder? ✅
 #### Use Builder when:
 - Object has many optional fields
 - Immutability is required
@@ -367,7 +367,7 @@ Mentioned as a practical alternative in modern Java Builder guides [javatechonli
 
 These conditions are explicitly listed in Builder references [geeksforgeeks.org], [javaspring.net]
 
-🔟 When NOT to use Builder ❌
+### 🔟 When NOT to use Builder ❌
 #### Avoid Builder when:
 - Object has only 2–3 fields
 - Construction is simple
@@ -392,7 +392,7 @@ These conditions are explicitly listed in Builder references [geeksforgeeks.org]
 
 ## Factory Design Pattern
 
-1️⃣ What is the Factory Design Pattern?
+### 1️⃣ What is the Factory Design Pattern?
 - The Factory Design Pattern is a creational pattern that:
     **Creates objects without exposing the creation logic to the client, and returns objects using a common interface or abstract class.**
 - In simple words:
@@ -400,7 +400,7 @@ These conditions are explicitly listed in Builder references [geeksforgeeks.org]
 
 This definition is consistent across standard Java references such as GeeksForGeeks, Baeldung, and Refactoring Guru [geeksforgeeks.org], [baeldung.com], [refactoring.guru]
 
-2️⃣ What problem does Factory solve?
+### 2️⃣ What problem does Factory solve?
 ❌ Problem without Factory
 
         if (type.equals("UPI")) {
@@ -423,7 +423,7 @@ These issues are explicitly mentioned in multiple Java Factory explanations [gee
 - Easy to add new implementations
 
 
-3️⃣ Simple Factory Pattern (most common in projects)
+### 3️⃣ Simple Factory Pattern (most common in projects)
 #### Step 1: Common interface
 
         public interface Payment {
@@ -465,7 +465,7 @@ These issues are explicitly mentioned in multiple Java Factory explanations [gee
 ✅ Creation logic is hidden
 ✅ Matches textbook Factory definition [geeksforgeeks.org]
 
-4️⃣ Factory Method Pattern (GoF version)
+### 4️⃣ Factory Method Pattern (GoF version)
 #### Definition
 Defines an interface for creating an object, **but lets subclasses decide which class to instantiate.**
 
@@ -492,7 +492,7 @@ Used when:
 - Framework-level extensibility is needed
 
 
-5️⃣ Factory in Spring Boot (VERY IMPORTANT)
+### 5️⃣ Factory in Spring Boot (VERY IMPORTANT)
 #### Spring uses Factory pattern internally
 Examples:
 - BeanFactory
@@ -521,7 +521,7 @@ Spring’s bean creation mechanism is based on Factory concepts [baeldung.com], 
 ✅ Open for extension
 ✅ Enterprise‑ready design
 
-6️⃣ Real‑world Java examples using Factory
+### 6️⃣ Real‑world Java examples using Factory
 #### Factory pattern is used in core Java APIs such as:
 - Calendar.getInstance()
 - NumberFormat.getInstance()
@@ -529,7 +529,7 @@ Spring’s bean creation mechanism is based on Factory concepts [baeldung.com], 
 
 These are documented examples of Factory usage in Java libraries [refactoring.guru]
 
-7️⃣ When should you use Factory? ✅
+### 7️⃣ When should you use Factory? ✅
 #### Use Factory when:
 - Object creation logic is complex
 - Multiple implementations exist
@@ -538,21 +538,21 @@ These are documented examples of Factory usage in Java libraries [refactoring.gu
 
 These use cases are explicitly listed in Java Factory references [geeksforgeeks.org]
 
-8️⃣ When NOT to use Factory ❌
+### 8️⃣ When NOT to use Factory ❌
 #### Avoid Factory when:
 - Only one implementation exists
 - Object creation is simple
 - Adds unnecessary complexity
 
 
-9️⃣ Factory vs Singleton (quick comparison)
+### 9️⃣ Factory vs Singleton (quick comparison)
 
         Aspect          Factory                 Singleton
         Purpose         Object creation logic   Single instance
         Instances       Multiple possible       Only one
         Usage           Decoupling              Shared resource
 
-🔟 Interview‑ready summary
+### 🔟 Interview‑ready summary
 #### Factory Pattern
 - Creational pattern
 - Hides object creation
@@ -567,14 +567,14 @@ These use cases are explicitly listed in Java Factory references [geeksforgeeks.
 
 
 ## Abstract Factory Design Pattern
-1️⃣ What is the Abstract Factory Pattern?
+### 1️⃣ What is the Abstract Factory Pattern?
 - The Abstract Factory Pattern is a creational design pattern that:
-    Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+    **Provides an interface for creating families of related or dependent objects without specifying their concrete classes.**
 - In simple terms: 
     **Factory creates one object**
     **Abstract Factory creates a group (family) of related objects**
 
-2️⃣ Why do we need Abstract Factory?
+### 2️⃣ Why do we need Abstract Factory?
 #### Problem scenario (without Abstract Factory)
 - Imagine you support multiple environments or multiple vendors:
     - UI themes → Light / Dark
@@ -588,7 +588,7 @@ These use cases are explicitly listed in Java Factory references [geeksforgeeks.
 
 This problem is highlighted in Abstract Factory explanations where families of related products must remain consistent
 
-3️⃣ Key idea (easy mental model)
+### 3️⃣ Key idea (easy mental model)
 - Abstract Factory → Creates factories
 - Concrete Factory → Creates a family of objects
 - Abstract Product → Common interfaces
@@ -596,7 +596,7 @@ This problem is highlighted in Abstract Factory explanations where families of r
 
 ✅ Ensures compatibility among related objects
 
-4️⃣ Real‑world example (Payment Gateway – Practical)
+### 4️⃣ Real‑world example (Payment Gateway – Practical)
 #### Scenario
 - You support:
     - Domestic Payments (UPI + RuPay)
@@ -605,7 +605,7 @@ This problem is highlighted in Abstract Factory explanations where families of r
     - Domestic clients never get international components
     - International clients never get domestic components
 
-5️⃣ Abstract Factory – Java Example
+### 5️⃣ Abstract Factory – Java Example
 #### Step 1: Abstract products
 
         public interface Payment {
@@ -689,7 +689,7 @@ This factory defines what products belong together, which is the core idea of Ab
 ✅ Entire family switches by changing one factory
 ✅ No concrete classes referenced
 
-6️⃣ Abstract Factory vs Factory (Very important)
+### 6️⃣ Abstract Factory vs Factory (Very important)
 
         Aspect                  Factory                 Abstract Factory
         Creates                 One object              Family of objects
@@ -699,7 +699,7 @@ This factory defines what products belong together, which is the core idea of Ab
 
 This distinction is emphasized in Abstract Factory best‑practice documents
 
-7️⃣ Abstract Factory in Spring (Enterprise relevance)
+### 7️⃣ Abstract Factory in Spring (Enterprise relevance)
 #### Spring uses Abstract Factory ideas internally:
 - BeanFactory creates beans
 - Profiles (@Profile) switch families of beans
@@ -717,7 +717,7 @@ Enterprise Java documents explicitly mention Abstract Factory as a foundation fo
         @Component
         class InternationalPaymentFactory implements PaymentFactory { }
 
-8️⃣ When should you use Abstract Factory? ✅
+### 8️⃣ When should you use Abstract Factory? ✅
 #### Use it when:
 - You need families of related objects
 - Switching configurations at runtime
@@ -726,14 +726,14 @@ Enterprise Java documents explicitly mention Abstract Factory as a foundation fo
 
 These scenarios are described as ideal Abstract Factory use cases in enterprise design references
 
-9️⃣ When NOT to use Abstract Factory ❌
+### 9️⃣ When NOT to use Abstract Factory ❌
 #### Avoid it when:
 - Only one product exists
 - No related objects
 - Adds unnecessary complexity
 
 
-🔟 Interview‑ready summary
+### 🔟 Interview‑ready summary
 #### Abstract Factory Pattern
 - Creational pattern
 - Creates families of related objects
@@ -745,15 +745,14 @@ These scenarios are described as ideal Abstract Factory use cases in enterprise 
 
 
 ## Object Pool Design Pattern
-1️⃣ What is the Object Pool Pattern?
+### 1️⃣ What is the Object Pool Pattern?
 - The Object Pool Design Pattern is a creational pattern that:
-    Manages a pool of reusable objects instead of creating and destroying them repeatedly.
+    **Manages a pool of reusable objects instead of creating and destroying them repeatedly.**
 - In simple words:
     **Create a fixed set of objects once, reuse them many times.**
+- This pattern is commonly discussed alongside other creational patterns such as Singleton, Factory, and Builder in advanced design‑pattern learning materials that explicitly list Object Pool as a pattern used for performance optimization.
 
-This pattern is commonly discussed alongside other creational patterns such as Singleton, Factory, and Builder in advanced design‑pattern learning materials that explicitly list Object Pool as a pattern used for performance optimization.
-
-2️⃣ What problem does Object Pool solve?
+### 2️⃣ What problem does Object Pool solve?
 #### Problem without Object Pool
 - Creating some objects is expensive, for example:
     - Database connections
@@ -777,7 +776,7 @@ These concerns are why Object Pool appears in performance‑focused design patte
 - Controlled resource usage
 - Predictable performance
 
-3️⃣ Core idea (mental model)
+### 3️⃣ Core idea (mental model)
 #### An Object Pool has:
 - Pool → Manages objects
 - Available objects
@@ -786,7 +785,7 @@ These concerns are why Object Pool appears in performance‑focused design patte
 
         Client → borrow() → use object → release() → Pool
 
-4️⃣ Simple Java Object Pool Example
+### 4️⃣ Simple Java Object Pool Example
 #### Step 1: Pooled object
 
         public class Connection {
@@ -834,7 +833,7 @@ These concerns are why Object Pool appears in performance‑focused design patte
 ✅ Thread‑safe
 ✅ Reusable resources
 
-5️⃣ Object Pool vs Singleton (important)
+### 5️⃣ Object Pool vs Singleton (important)
 
         Aspect	        Singleton	            Object Pool
         Instances	    Only one	            Multiple
@@ -842,7 +841,7 @@ These concerns are why Object Pool appears in performance‑focused design patte
         Lifecycle	    Entire app	            Borrow & return
         Example	        Logger	                DB connections
         
-6️⃣ Real‑world Java & Spring examples
+### 6️⃣ Real‑world Java & Spring examples
 #### Database Connection Pool
 - HikariCP
 - Apache DBCP
@@ -861,7 +860,7 @@ When you configure:
         spring.datasource.hikari.maximum-pool-size=10
 You are directly using the Object Pool pattern.
 
-7️⃣ When should you use Object Pool?
+### 7️⃣ When should you use Object Pool?
 #### Use it when:
 - Object creation is expensive
 - Limited resources exist
@@ -870,7 +869,7 @@ You are directly using the Object Pool pattern.
 
 These use cases are why Object Pool is discussed in advanced creational‑pattern materials
 
-8️⃣ When NOT to use Object Pool ❌
+### 8️⃣ When NOT to use Object Pool ❌
 #### Avoid it when:
 - Objects are cheap to create
 - Objects are lightweight & stateless
@@ -879,13 +878,13 @@ These use cases are why Object Pool is discussed in advanced creational‑patter
 
 ⚠️ Modern JVMs are fast at object creation—use pooling only when justified.
 
-9️⃣ Common pitfalls (important)
+### 9️⃣ Common pitfalls (important)
 - Forgetting to return objects → resource leak
 - Pool size too small → thread starvation
 - Pool size too large → memory waste
 - Sharing stateful objects incorrectly
 
-🔟 Interview‑ready summary
+### 🔟 Interview‑ready summary
 #### Object Pool Pattern
 - Creational pattern
 - Reuses expensive objects
@@ -900,16 +899,16 @@ These use cases are why Object Pool is discussed in advanced creational‑patter
 - ExecutorService = Object Pool
 
 
+
 ## Prototype design pattern
-1️⃣ What is the Prototype Design Pattern?
+### 1️⃣ What is the Prototype Design Pattern?
 - The Prototype Design Pattern is a creational pattern that:
-    Creates new objects by copying (cloning) existing objects instead of creating them from scratch.
+    **Creates new objects by copying (cloning) existing objects instead of creating them from scratch.**
 - In simple words:
     **Don’t create a new object with new — clone an existing one.**
+- This pattern is listed as one of the GoF creational patterns and is typically taught along with Factory, Builder, and Object Pool in enterprise Java design‑pattern references and training materials.
 
-This pattern is listed as one of the GoF creational patterns and is typically taught along with Factory, Builder, and Object Pool in enterprise Java design‑pattern references and training materials.
-
-2️⃣ What problem does Prototype solve?
+### 2️⃣ What problem does Prototype solve?
 #### Problem without Prototype
 - Creating an object can be:
     - Expensive (DB calls, configuration loading)
@@ -938,7 +937,7 @@ This pattern is listed as one of the GoF creational patterns and is typically ta
 
 This idea—copying pre‑configured objects instead of rebuilding them—is the core intent of the Prototype pattern in Java
 
-3️⃣ Core idea (mental model)
+### 3️⃣ Core idea (mental model)
 
         Original Object  →  clone()  →  New Object
 
@@ -946,7 +945,7 @@ Instead of:
 
         new → configure → validate → initialize
 
-4️⃣ Prototype in Java (Cloneable interface)
+### 4️⃣ Prototype in Java (Cloneable interface)
 #### Step 1: Prototype interface
 
         public interface Prototype extends Cloneable {
@@ -989,7 +988,7 @@ Instead of:
 ✅ Objects are independent
 ✅ Faster creation
 
-5️⃣ Shallow Copy vs Deep Copy (VERY IMPORTANT)
+### 5️⃣ Shallow Copy vs Deep Copy (VERY IMPORTANT)
 #### Shallow Copy
 - Copies references
 - Shared internal objects
@@ -1016,7 +1015,7 @@ Instead of:
 
 Understanding shallow vs deep cloning is critical when applying Prototype correctly in Java systems
 
-6️⃣ Real‑world Java examples
+### 6️⃣ Real‑world Java examples
 #### Java API
 - Object.clone()
 - ArrayList.clone()
@@ -1031,13 +1030,13 @@ These APIs demonstrate Prototype behavior by creating copies instead of rebuildi
 
 Prototype ideas are also reflected in Spring’s prototype bean scope, where a new instance is created per request (conceptually similar, though not cloning internally).
 
-7️⃣ Prototype vs Factory vs Builder (important)
+### 7️⃣ Prototype vs Factory vs Builder (important)
         Pattern	            Focus
         Factory	            Decide which object
         Builder	            Decide how to build
         Prototype	        Copy an existing object
 
-8️⃣ When should you use Prototype? ✅
+### 8️⃣ When should you use Prototype? ✅
 #### Use Prototype when:
 - Object creation is expensive
 - Many similar objects are needed
@@ -1046,14 +1045,14 @@ Prototype ideas are also reflected in Spring’s prototype bean scope, where a n
 
 These scenarios are explicitly mentioned in creational‑pattern learning materials that include Prototype alongside Object Pool and Factory
 
-9️⃣ When NOT to use Prototype ❌
+### 9️⃣ When NOT to use Prototype ❌
 #### Avoid it when:
 - Objects are simple
 - Deep copying is complex
 - Object graph is huge
 - Cloning logic becomes error‑prone
 
-🔟 Common pitfalls (interview favorite)
+### 🔟 Common pitfalls (interview favorite)
 - Forgetting deep copy → shared state bugs
 - Using Cloneable blindly
 - Not handling mutable fields
@@ -1072,7 +1071,7 @@ These scenarios are explicitly mentioned in creational‑pattern learning materi
 
 
 ## Decorator Design Pattern
-1️⃣ What is the Decorator Design Pattern?
+### 1️⃣ What is the Decorator Design Pattern?
 - The Decorator Pattern is a structural design pattern that:
     **Allows you to add new behavior to an object dynamically, without changing its existing code or using inheritance.**
 - In simple words:
@@ -1080,7 +1079,7 @@ These scenarios are explicitly mentioned in creational‑pattern learning materi
 - Think of it as:
     **“Object + wrapper + wrapper + wrapper”**
 
-2️⃣ What problem does Decorator solve?
+### 2️⃣ What problem does Decorator solve?
 #### Problem without Decorator (inheritance explosion)
 - Imagine adding features to a base class:
 
@@ -1104,7 +1103,7 @@ These scenarios are explicitly mentioned in creational‑pattern learning materi
 ✅ Composable
 ✅ Open for extension
 
-3️⃣ Core idea (mental model)
+### 3️⃣ Core idea (mental model)
 
         Client → Decorator → Decorator → Concrete Object
 
@@ -1113,7 +1112,7 @@ These scenarios are explicitly mentioned in creational‑pattern learning materi
 - Holds a reference to another object of that interface
 - Adds behavior before/after delegating
 
-4️⃣ Classic Java Example (Coffee – Realistic & simple)
+### 4️⃣ Classic Java Example (Coffee – Realistic & simple)
 #### Step 1: Component interface
 
         public interface Coffee {
@@ -1206,7 +1205,7 @@ Basic Coffee, Milk, Sugar\
 ✅ Behavior added at runtime
 ✅ No subclass explosion
 
-5️⃣ Decorator vs Inheritance (important)
+### 5️⃣ Decorator vs Inheritance (important)
 
         Aspect	            Inheritance	        Decorator
         Flexibility	        Static	            Dynamic
@@ -1214,7 +1213,7 @@ Basic Coffee, Milk, Sugar\
         Runtime changes	    ❌	                ✅
         Open/Closed	        ❌	                ✅
 
-6️⃣ Real‑world Java & Spring examples (VERY IMPORTANT)
+### 6️⃣ Real‑world Java & Spring examples (VERY IMPORTANT)
 #### Java Core APIs
 - BufferedInputStream
 - DataInputStream
@@ -1242,27 +1241,27 @@ Spring heavily uses Decorator concepts:
 - Request/response processing pipelines
 - Pricing engines (base price + tax + discount)
 
-7️⃣ When should you use Decorator? ✅
+### 7️⃣ When should you use Decorator? ✅
 #### Use Decorator when:
 - You need optional or dynamic behavior
 - You want to avoid subclass explosion
 - Features need to be combinable
 - You want runtime flexibility
 
-8️⃣ When NOT to use Decorator ❌
+### 8️⃣ When NOT to use Decorator ❌
 #### Avoid it when:
 - Only one variation exists
 - Behavior is static
 - Too many decorators reduce readability
 
-9️⃣ Decorator vs Proxy vs Adapter (quick clarity)
+### 9️⃣ Decorator vs Proxy vs Adapter (quick clarity)
         
         Pattern	        Purpose
         Decorator	    Add behavior
         Proxy	        Control access
         Adapter	        Convert interface
 
-🔟 Interview‑ready summary
+### 🔟 Interview‑ready summary
 
 #### Decorator Pattern
 - Structural pattern
@@ -1275,14 +1274,14 @@ Spring heavily uses Decorator concepts:
 
 
 ## Proxy Design Pattern
-1️⃣ What is the Proxy Design Pattern?
+### 1️⃣ What is the Proxy Design Pattern?
 - The Proxy Pattern is a structural design pattern that:
-    Provides a substitute or placeholder for another object to control access to it.
+    **Provides a substitute or placeholder for another object to control access to it.**
 - In simple words:
     **Client talks to a proxy instead of the real object.**
     The proxy decides when, how, and whether to forward the request.
 
-2️⃣ Why do we need Proxy? (Problem it solves)
+### 2️⃣ Why do we need Proxy? (Problem it solves)
 #### Sometimes the real object:
 - Is expensive to create
 - Is remote (network call)
@@ -1307,7 +1306,7 @@ Spring heavily uses Decorator concepts:
 - Lazy initialization
 - Extra behavior without touching real class
 
-3️⃣ Core idea (mental model)
+### 3️⃣ Core idea (mental model)
 
         Client → Proxy → Real Object
 
@@ -1315,7 +1314,7 @@ Spring heavily uses Decorator concepts:
 - Proxy holds reference to the real object
 - Proxy adds logic before/after delegation
 
-4️⃣ Basic Java Example (Simple & Clear)
+### 4️⃣ Basic Java Example (Simple & Clear)
 #### Step 1: Subject interface
 
         public interface Image {
@@ -1372,7 +1371,7 @@ Spring heavily uses Decorator concepts:
 ✅ Real object created only when needed
 ✅ Proxy controls access
 
-5️⃣ Types of Proxy (VERY IMPORTANT)
+### 5️⃣ Types of Proxy (VERY IMPORTANT)
 
 🔹 1. Virtual Proxy
 - Delays object creation (lazy loading)
@@ -1405,7 +1404,7 @@ Spring heavily uses Decorator concepts:
 - Adds logging, metrics, tracing
 - Common in enterprise systems
 
-6️⃣ Proxy vs Decorator (VERY COMMON CONFUSION)
+### 6️⃣ Proxy vs Decorator (VERY COMMON CONFUSION)
         
         Aspect	            Proxy	                    Decorator
         Purpose	            Control access	            Add behavior
@@ -1416,7 +1415,7 @@ Spring heavily uses Decorator concepts:
 #### Key interview line:
 **Decorator enhances behavior, Proxy controls access.**
 
-7️⃣ Proxy in Java & Spring (CRITICAL FOR YOU)
+### 7️⃣ Proxy in Java & Spring (CRITICAL FOR YOU)
 
 #### Spring AOP = Proxy Pattern
 - Spring creates proxies for:
@@ -1450,7 +1449,7 @@ Example:
 
 Spring automatically chooses between JDK Proxy and CGLIB.
 
-8️⃣ Real‑world enterprise examples
+### 8️⃣ Real‑world enterprise examples
 - Database access control
 - API gateways
 - Lazy‑loaded entities (Hibernate)
@@ -1458,14 +1457,14 @@ Spring automatically chooses between JDK Proxy and CGLIB.
 - Metrics & tracing
 - Circuit breakers (Proxy‑like behavior)
 
-9️⃣ When should you use Proxy?
+### 9️⃣ When should you use Proxy?
 #### Use Proxy when:
 - Access control is needed
 - Lazy loading is required
 - Remote calls involved
 - Cross‑cutting concerns exist
 
-🔟 When NOT to use Proxy ❌
+### 🔟 When NOT to use Proxy ❌
 #### Avoid Proxy when:
 - Object is simple
 - No access control needed
@@ -1478,20 +1477,20 @@ Spring automatically chooses between JDK Proxy and CGLIB.
     - Same interface as real object
     - Used for security, lazy loading, remote calls
 - One‑line definition
-    **“Proxy provides a placeholder to control access to another object.”**
+    - **“Proxy provides a placeholder to control access to another object.”**
 
 
 ## Composite Design Pattern
-1️⃣ What is the Composite Design Pattern?
+### 1️⃣ What is the Composite Design Pattern?
 - The Composite Design Pattern is a structural design pattern that:
-    Allows you to treat individual objects and compositions of objects uniformly.
+    **Allows you to treat individual objects and compositions of objects uniformly.**
 - In simple words:
     **A group of objects should behave like a single object.**
 - Client code doesn’t need to care whether it’s working with:
     - One object (Leaf), or
     - A group of objects (Composite)
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 - File system
     - File → single item
     - Folder → contains files and folders
@@ -1502,7 +1501,7 @@ Spring automatically chooses between JDK Proxy and CGLIB.
 👉 You can call the same operation on file or folder.
 That’s Composite.
 
-3️⃣ What problem does Composite solve?
+### 3️⃣ What problem does Composite solve?
 #### Problem without Composite
 - Suppose you model:
     - Employees
@@ -1527,7 +1526,7 @@ That’s Composite.
 ✅ Scalable
 ✅ Polymorphic
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
                 Component
                 /       \
@@ -1539,7 +1538,7 @@ That’s Composite.
 - Leaf → individual object
 - Composite → group of components
 
-5️⃣ Classic Java Example (Employee hierarchy)
+### 5️⃣ Classic Java Example (Employee hierarchy)
 #### Step 1: Component interface
 
         public interface Employee {
@@ -1607,13 +1606,13 @@ That’s Composite.
 ✅ Client calls showDetails()
 ✅ Doesn’t care if it’s leaf or composite
 
-6️⃣ Why Composite is powerful
+### 6️⃣ Why Composite is powerful
 - Simplifies client code
 - Eliminates conditional logic
 - Makes tree‑like structures easy to manage
 - Supports recursive operations
 
-7️⃣ Composite in real Java & Spring usage (IMPORTANT)
+### 7️⃣ Composite in real Java & Spring usage (IMPORTANT)
 #### Java Core APIs
 - java.awt.Container → contains components
 - javax.swing.JComponent
@@ -1627,7 +1626,7 @@ That’s Composite.
 - UI component trees
 - API request validation chains (tree based)
 
-8️⃣ Composite vs Decorator vs Proxy (quick clarity)
+### 8️⃣ Composite vs Decorator vs Proxy (quick clarity)
 
         Pattern	        Purpose
         Composite	    Tree structure (part‑whole)
@@ -1637,14 +1636,14 @@ That’s Composite.
 #### Key interview line:
 **Composite lets you treat a group of objects the same way as a single object.**
 
-9️⃣ When should you use Composite?
+### 9️⃣ When should you use Composite?
 #### Use Composite when:
 - You have hierarchical/tree structures
 - You want uniform treatment
 - Parent and child objects share behavior
 - Recursive operations are needed
 
-🔟 When NOT to use Composite
+### 🔟 When NOT to use Composite
 #### Avoid Composite when:
 - No hierarchy exists
 - Leaf and composite behavior differs significantly
@@ -1661,13 +1660,13 @@ That’s Composite.
 
 
 ## Adapter Design Pattern
-1️⃣ What is the Adapter Design Pattern?
+### 1️⃣ What is the Adapter Design Pattern?
 - The Adapter Pattern is a structural design pattern that:
-    Allows incompatible interfaces to work together by converting one interface into another that the client expects.
+    **Allows incompatible interfaces to work together by converting one interface into another that the client expects.**
 - In simple words:
     **Adapter acts as a bridge between two incompatible systems.**
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 #### Mobile charger adapter
     - Socket → 3‑pin
     - Charger → 2‑pin
@@ -1678,7 +1677,7 @@ That’s Composite.
 
 That’s exactly what the Adapter pattern does in software.
 
-3️⃣ What problem does Adapter solve?
+### 3️⃣ What problem does Adapter solve?
 #### Problem without Adapter
 - You have:
     - Existing (legacy / third‑party) code
@@ -1704,7 +1703,7 @@ That’s exactly what the Adapter pattern does in software.
 ✅ No changes to legacy code
 ✅ Clean integration
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Client → Target Interface → Adapter → Adaptee (Existing class)
 - Where:
@@ -1712,7 +1711,7 @@ That’s exactly what the Adapter pattern does in software.
     - Adaptee → Existing incompatible class
     - Adapter → Translator between them
     
-5️⃣ Classic Java Example (Simple & Clear)
+### 5️⃣ Classic Java Example (Simple & Clear)
 #### Scenario
 - Existing payment system: OldPaymentService
 - New system expects: PaymentProcessor
@@ -1758,7 +1757,7 @@ That’s exactly what the Adapter pattern does in software.
 - Legacy system reused
 - Adapter handles conversion
 
-6️⃣ Types of Adapter (IMPORTANT)
+### 6️⃣ Types of Adapter (IMPORTANT)
 
 🔹 1. Object Adapter (most common ✅)
 - Uses composition
@@ -1776,7 +1775,7 @@ That’s exactly what the Adapter pattern does in software.
     ❌ Less flexible
     ❌ Rare in Java (due to single inheritance)
 
-7️⃣ Adapter vs Decorator vs Proxy (very common confusion)
+### 7️⃣ Adapter vs Decorator vs Proxy (very common confusion)
     
         Pattern	        Purpose
         Adapter	        Make incompatible interfaces work
@@ -1786,7 +1785,7 @@ That’s exactly what the Adapter pattern does in software.
 #### Key interview line:
 **Adapter changes the interface, Decorator adds behavior, Proxy controls access.**
 
-8️⃣ Real‑world Java & Spring examples (VERY IMPORTANT)
+### 8️⃣ Real‑world Java & Spring examples (VERY IMPORTANT)
 #### Java Core APIs
 - InputStreamReader\
     → Adapts InputStream to Reader
@@ -1807,14 +1806,14 @@ Spring uses Adapter pattern heavily:
 - API version migration
 - Microservices protocol conversion
 
-9️⃣ When should you use Adapter? ✅
+### 9️⃣ When should you use Adapter? ✅
 #### Use Adapter when:
 - Interfaces are incompatible
 - Legacy or third‑party code cannot be changed
 - You want clean integration
 - You want to avoid rewriting stable code
 
-🔟 When NOT to use Adapter ❌
+### 🔟 When NOT to use Adapter ❌
 #### Avoid Adapter when:
 - You control both interfaces
 - Direct refactoring is possible
@@ -1831,16 +1830,16 @@ Spring uses Adapter pattern heavily:
 
 
 ## Bridge Design Pattern
-1️⃣ What is the Bridge Design Pattern?
+### 1️⃣ What is the Bridge Design Pattern?
 - The Bridge Pattern is a structural design pattern that:
-    Decouples an abstraction from its implementation so that the two can vary independently.
+    **Decouples an abstraction from its implementation so that the two can vary independently.**
 - In simple words:
     **Separate what the system does from how it does it.**
 
 ✅ Abstraction and implementation are developed independently
 ✅ Changes in one don’t affect the other
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 - TV Remote & TV brands
     - Remote (abstraction)
     - TV brand (implementation: Sony, Samsung)
@@ -1850,7 +1849,7 @@ Spring uses Adapter pattern heavily:
 
 👉 Both evolve independently → Bridge
 
-3️⃣ What problem does Bridge solve?
+### 3️⃣ What problem does Bridge solve?
 #### Problem without Bridge (class explosion)
 - Suppose you have:
     - Shapes: Circle, Square
@@ -1876,7 +1875,7 @@ Spring uses Adapter pattern heavily:
 ✅ Combine them dynamically
 ✅ No class explosion
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Abstraction  ----->  Implementor
             |                    |
@@ -1885,7 +1884,7 @@ Spring uses Adapter pattern heavily:
 - Abstraction has‑a implementation
 - Uses composition, not inheritance
 
-5️⃣ Classic Java Example (Shape + Color)
+### 5️⃣ Classic Java Example (Shape + Color)
 #### Step 1: Implementor interface
 
         public interface Color {
@@ -1954,7 +1953,7 @@ Spring uses Adapter pattern heavily:
 ✅ Shapes & colors vary independently
 ✅ Clean separation of concerns
 
-6️⃣ Bridge vs Adapter vs Decorator (important)
+### 6️⃣ Bridge vs Adapter vs Decorator (important)
         
         Pattern	        Purpose
         Bridge	        Separate abstraction & implementation
@@ -1964,14 +1963,14 @@ Spring uses Adapter pattern heavily:
 #### Key interview line:
 **Bridge is about design‑time separation, Adapter is about post‑design compatibility.**
 
-7️⃣ Bridge vs Strategy (common confusion)
+### 7️⃣ Bridge vs Strategy (common confusion)
 
         Aspect	    Bridge	                        Strategy
         Intent	    Structural separation	        Algorithm selection
         Focus	    Abstraction vs implementation	Behavior change
         Usage	    Architecture‑level	            Logic‑level
 
-8️⃣ Real‑world Java & Spring use cases
+### 8️⃣ Real‑world Java & Spring use cases
 - JDBC (Classic example)
     - Connection (abstraction)
     - MySQL / Oracle drivers (implementation)
@@ -1984,14 +1983,14 @@ Spring uses Adapter pattern heavily:
     - Report generation + format rendering
     - Notification system (type vs channel)
 
-9️⃣ When should you use Bridge?
+### 9️⃣ When should you use Bridge?
 #### Use Bridge when:
 - You foresee multiple dimensions of variation
 - You want to avoid class explosion
 - Abstraction and implementation should evolve independently
 - Clean architecture is required
 
-🔟 When NOT to use Bridge
+### 🔟 When NOT to use Bridge
 #### Avoid Bridge when:
 - Only one implementation exists
 - Over‑engineering a simple design
@@ -2008,14 +2007,14 @@ Spring uses Adapter pattern heavily:
 
 
 ## Facade Design Pattern
-1️⃣ What is the Facade Design Pattern?
+### 1️⃣ What is the Facade Design Pattern?
 - The Facade Pattern is a structural design pattern that:
-    Provides a simplified, unified interface to a complex subsystem.
+    **Provides a simplified, unified interface to a complex subsystem.**
 - In simple words:
     **Facade hides complexity and exposes only what the client needs.**
 - This definition matches how Facade is described in structural‑pattern references and enterprise guidelines, where the goal is to simplify interaction with complex systems
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 🏦 Bank counter
 
@@ -2028,7 +2027,7 @@ Spring uses Adapter pattern heavily:
 
 👉 That counter is the Facade.
 
-3️⃣ What problem does Facade solve?
+### 3️⃣ What problem does Facade solve?
 
 #### Problem without Facade
 Client code directly interacts with many classes:
@@ -2054,7 +2053,7 @@ Introduce a single entry point:
 ✅ Subsystem complexity hidden
 ✅ Clean and readable code
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Client → Facade → Subsystem classes
 
@@ -2062,7 +2061,7 @@ Introduce a single entry point:
 - It coordinates them
 - Subsystems remain reusable
 
-5️⃣ Classic Java Example (Order Processing)
+### 5️⃣ Classic Java Example (Order Processing)
 #### Step 1: Subsystem classes
 
         public class InventoryService {
@@ -2106,7 +2105,7 @@ Introduce a single entry point:
 ✅ No subsystem exposure
 ✅ Simplified interaction
 
-6️⃣ Facade vs Adapter vs Proxy (VERY IMPORTANT)
+### 6️⃣ Facade vs Adapter vs Proxy (VERY IMPORTANT)
         
         Pattern	        Purpose
         Facade	        Simplify a system
@@ -2117,7 +2116,7 @@ Introduce a single entry point:
 #### Key interview line:
 **Facade simplifies usage; Adapter converts interfaces; Proxy controls access.**
 
-7️⃣ Facade in real Java & Spring usage
+### 7️⃣ Facade in real Java & Spring usage
 - Java APIs
     - javax.faces.context.FacesContext
     - SLF4J Logger (facade over Log4j / Logback)
@@ -2130,7 +2129,7 @@ Introduce a single entry point:
 
 Enterprise coding guidelines explicitly recommend Facade to simplify interaction with multiple internal services
 
-8️⃣ When should you use Facade? ✅
+### 8️⃣ When should you use Facade? ✅
 #### Use Facade when:
 - Subsystem is complex
 - Client needs only limited functionality
@@ -2139,13 +2138,13 @@ Enterprise coding guidelines explicitly recommend Facade to simplify interaction
 
 These use cases are highlighted in structural‑pattern best‑practice documents
 
-9️⃣ When NOT to use Facade ❌
+### 9️⃣ When NOT to use Facade ❌
 #### Avoid Facade when:
 - Subsystem is already simple
 - It becomes a “god class”
 - You need fine‑grained control
 
-🔟 Interview‑ready summary
+### 🔟 Interview‑ready summary
 - Facade Pattern
     - Structural pattern
     - Simplifies complex subsystems
@@ -2155,13 +2154,13 @@ These use cases are highlighted in structural‑pattern best‑practice document
     - **“Facade provides a simple interface to a complex system.”**
 
 ## Flyweight Design Pattern (Java)
-1️⃣ What is the Flyweight Design Pattern?
+### 1️⃣ What is the Flyweight Design Pattern?
 - The Flyweight Pattern is a structural design pattern that:
-    Reduces memory usage by sharing common (intrinsic) state between multiple objects instead of creating many similar objects.
+    **Reduces memory usage by sharing common (intrinsic) state between multiple objects instead of creating many similar objects.**
 - In simple words:
     **Reuse objects instead of creating new ones again and again.**
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 📝 Text editor characters
 - A document may have 100,000 characters
@@ -2172,7 +2171,7 @@ These use cases are highlighted in structural‑pattern best‑practice document
 
 That’s Flyweight.
 
-3️⃣ What problem does Flyweight solve?
+### 3️⃣ What problem does Flyweight solve?
 #### Problem without Flyweight
 - Imagine a game/map/editor creating objects like this:
 
@@ -2192,7 +2191,7 @@ That’s Flyweight.
 ✅ Lower memory usage
 ✅ Better performance
 
-4️⃣ Core idea (VERY IMPORTANT)
+### 4️⃣ Core idea (VERY IMPORTANT)
 
 🔹 Intrinsic State
 - Shared
@@ -2206,7 +2205,7 @@ That’s Flyweight.
 
         Flyweight (shared) + Context (external data)
 
-5️⃣ Core structure (mental model)
+### 5️⃣ Core structure (mental model)
 
         Client → FlyweightFactory → Flyweight
                             ↑
@@ -2216,7 +2215,7 @@ That’s Flyweight.
 - Reuses existing objects
 - Creates new only if needed
 
-6️⃣ Classic Java Example (Text Characters)
+### 6️⃣ Classic Java Example (Text Characters)
 #### Step 1: Flyweight interface
 
         public interface CharacterFlyweight {
@@ -2266,7 +2265,7 @@ That’s Flyweight.
 ✅ Same object reused
 ✅ Different positions (extrinsic state)
 
-7️⃣ Flyweight vs Object Pool (COMMON CONFUSION)
+### 7️⃣ Flyweight vs Object Pool (COMMON CONFUSION)
     
         Aspect	            Flyweight	            Object Pool
         Goal	            Reduce memory	        Reuse expensive objects
@@ -2277,7 +2276,7 @@ That’s Flyweight.
 #### Key interview line:
 **Flyweight shares objects; Object Pool manages reusable resources.**
 
-8️⃣ Real‑world Java & enterprise examples
+### 8️⃣ Real‑world Java & enterprise examples
 - Java Core
     - Integer.valueOf() (cache for small integers)
     - Boolean.TRUE / FALSE
@@ -2293,14 +2292,14 @@ That’s Flyweight.
     - Security roles
     - Static reference data
 
-9️⃣ When should you use Flyweight? ✅
+### 9️⃣ When should you use Flyweight? ✅
 #### Use Flyweight when:
 - Large number of similar objects
 - Memory usage is high
 - Object state can be split
 - Performance matters
 
-🔟 When NOT to use Flyweight ❌
+### 🔟 When NOT to use Flyweight ❌
 #### Avoid Flyweight when:
 - Objects are few
 - Objects are highly stateful
@@ -2320,16 +2319,15 @@ That’s Flyweight.
 
 
 ## State Design Pattern
-1️⃣ What is the State Design Pattern?
+### 1️⃣ What is the State Design Pattern?
 - The State Pattern is a behavioral design pattern that:
-    Allows an object to change its behavior when its internal state changes, as if it changed its class.
+    **Allows an object to change its behavior when its internal state changes, as if it changed its class.**
 - In simple words:
     **An object behaves differently in different states, and the state decides the behavior—not if‑else logic.**
+- This definition aligns with standard explanations of the State pattern as a way to handle behavior changes based on state without complex conditional logic
 
-This definition aligns with standard explanations of the State pattern as a way to handle behavior changes based on state without complex conditional logic
 
-
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 🚦 Traffic Light
 
@@ -2339,7 +2337,7 @@ This definition aligns with standard explanations of the State pattern as a way 
 
 Same traffic light object, different behavior depending on state.
 
-3️⃣ What problem does State solve?
+### 3️⃣ What problem does State solve?
 #### Problem without State (if‑else explosion)
 
         if (state == NEW) {
@@ -2366,7 +2364,7 @@ Courses and pattern guides explicitly highlight this problem as the motivation f
 ✅ Clean transitions
 ✅ Easy to extend
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Context → State
                 |
@@ -2376,7 +2374,7 @@ Courses and pattern guides explicitly highlight this problem as the motivation f
 - State → interface for behavior
 - Concrete States → state‑specific behavior
 
-5️⃣ Classic Java Example (Order Lifecycle – Very Realistic)
+### 5️⃣ Classic Java Example (Order Lifecycle – Very Realistic)
 #### Step 1: State interface
 
         public interface OrderState {
@@ -2476,17 +2474,17 @@ Completed
 ✅ Behavior controlled by state
 ✅ Clean transitions
 
-6️⃣ State vs Strategy (VERY COMMON CONFUSION)
+### 6️⃣ State vs Strategy (VERY COMMON CONFUSION)
         Aspect	            State   	                Strategy
         Purpose	            Behavior based on state	    Algorithm selection
-        State transition	✅ Yes	                  ❌ No
+        State transition	✅ Yes	                    ❌ No
         Context awareness	State knows context	        Strategy usually doesn’t
         Example	            Order lifecycle	            Pricing algorithm
 
 #### Key interview line:
 **Strategy chooses behavior; State represents behavior changes over time.**
 
-7️⃣ State in real Java & Spring systems
+### 7️⃣ State in real Java & Spring systems
 - Spring State Machine - Spring provides StateMachine support for:
     - Order workflows
     - Payment lifecycles
@@ -2503,14 +2501,14 @@ This directly implements the State pattern concept.
     
 Enterprise coding guidelines and pattern courses often cite these exact use cases for State
 
-8️⃣ When should you use State?
+### 8️⃣ When should you use State?
 #### Use State when:
 - Object behavior changes with state
 - You see many if‑else based on state
 - State transitions are explicit
 - Workflow logic is complex
 
-9️⃣ When NOT to use State
+### 9️⃣ When NOT to use State
 #### Avoid State when:
 - Only 2 simple states exist
 - Logic is trivial
@@ -2526,16 +2524,15 @@ Enterprise coding guidelines and pattern courses often cite these exact use case
     - **“State allows an object to change its behavior when its state changes.”**
 
 
-##Strategy Design Pattern
-1️⃣ What is the Strategy Design Pattern?
+## Strategy Design Pattern
+### 1️⃣ What is the Strategy Design Pattern?
 - The Strategy Pattern is a behavioral design pattern that:
-    Defines a family of algorithms, encapsulates each one, and makes them interchangeable at runtime.
+    **Defines a family of algorithms, encapsulates each one, and makes them interchangeable at runtime.**
 - In simple words:
     **Choose an algorithm at runtime instead of hard‑coding it with if‑else.**
+- This definition is explicitly stated in enterprise design‑pattern references describing Strategy as selecting behavior dynamically via interfaces rather than conditionals.
 
-This definition is explicitly stated in enterprise design‑pattern references describing Strategy as selecting behavior dynamically via interfaces rather than conditionals.
-
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 🚗 Navigation app
 - Fastest route
@@ -2546,7 +2543,7 @@ You choose one strategy based on need.
 
 👉 Same navigation system, different algorithms.
 
-3️⃣ What problem does Strategy solve?
+### 3️⃣ What problem does Strategy solve?
 #### Problem without Strategy (if‑else everywhere)
 
         if (type.equals("UPI")) {
@@ -2574,7 +2571,7 @@ These problems are highlighted in design‑pattern guides as the motivation for 
 ✅ Easy extension
 ✅ Better testability
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Context → Strategy
                     |
@@ -2584,7 +2581,7 @@ These problems are highlighted in design‑pattern guides as the motivation for 
 - Strategy → interface
 - Concrete Strategies → actual algorithms
 
-5️⃣ Classic Java Example (Payment Processing – Very Practical)
+### 5️⃣ Classic Java Example (Payment Processing – Very Practical)
 #### Step 1: Strategy interface
 
         public interface PaymentStrategy {
@@ -2630,7 +2627,7 @@ These problems are highlighted in design‑pattern guides as the motivation for 
 ✅ No if‑else
 ✅ Strategy chosen at runtime
 
-6️⃣ Strategy vs State (VERY COMMON CONFUSION)
+### 6️⃣ Strategy vs State (VERY COMMON CONFUSION)
         
         Aspect	            Strategy	        State
         Purpose	            Select algorithm	Behavior based on state
@@ -2641,7 +2638,7 @@ These problems are highlighted in design‑pattern guides as the motivation for 
 #### Key interview line:
 **Strategy is chosen; State evolves.**
 
-7️⃣ Strategy in Spring Boot (VERY IMPORTANT FOR YOU)
+### 7️⃣ Strategy in Spring Boot (VERY IMPORTANT FOR YOU)
 #### Spring + Strategy (real enterprise usage)
 
         @Service
@@ -2666,7 +2663,7 @@ These problems are highlighted in design‑pattern guides as the motivation for 
 
 This aligns with enterprise guidelines that recommend Strategy to decouple behavior and allow runtime selection.
 
-8️⃣ Real‑world enterprise use cases
+### 8️⃣ Real‑world enterprise use cases
 - Pricing algorithms
 - Discount rules
 - Payment gateways
@@ -2676,14 +2673,14 @@ This aligns with enterprise guidelines that recommend Strategy to decouple behav
 
 These examples are consistently used in enterprise Strategy pattern explanations
 
-9️⃣ When should you use Strategy? ✅
+### 9️⃣ When should you use Strategy? ✅
 #### Use Strategy when:
 - Multiple algorithms exist
 - Behavior must change at runtime
 - if‑else based on type appears
 - Code must be extensible
 
-🔟 When NOT to use Strategy ❌
+### 🔟 When NOT to use Strategy ❌
 #### Avoid Strategy when:
 - Only one algorithm exists
 - Behavior is unlikely to change
@@ -2700,15 +2697,14 @@ These examples are consistently used in enterprise Strategy pattern explanations
 
 
 ## Observer Design Pattern (Java)
-1️⃣ What is the Observer Design Pattern?
+### 1️⃣ What is the Observer Design Pattern?
 - The Observer Pattern is a behavioral design pattern that:
-    Defines a one‑to‑many dependency between objects so that when one object changes state, all its dependents are notified automatically.
+    **Defines a one‑to‑many dependency between objects so that when one object changes state, all its dependents are notified automatically.**
 - In simple words:
     **When something changes, all interested parties are informed automatically.**
+- This definition is consistent across standard design‑pattern references and enterprise guidelines that describe Observer as an event‑notification mechanism.
 
-This definition is consistent across standard design‑pattern references and enterprise guidelines that describe Observer as an event‑notification mechanism.
-
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 - YouTube channel subscription
     - Channel = Subject
@@ -2720,7 +2716,7 @@ This definition is consistent across standard design‑pattern references and en
 
 👉 Subscribers don’t keep checking manually — they are notified.
 
-3️⃣ What problem does Observer solve?
+### 3️⃣ What problem does Observer solve?
 #### Problem without Observer (tight coupling)
 
         orderService.updateStatus();
@@ -2745,7 +2741,7 @@ Enterprise systems often hit this issue when notifications, logging, or auditing
 ✅ Easy extension
 ✅ Event‑driven design
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Subject → Observer
                 |
@@ -2755,7 +2751,7 @@ Enterprise systems often hit this issue when notifications, logging, or auditing
 - Observer → interested in changes
 - Notification → automatic
 
-5️⃣ Classic Java Example (Order Status Notifications)
+### 5️⃣ Classic Java Example (Order Status Notifications)
 #### Step 1: Observer interface
 
         public interface OrderObserver {
@@ -2831,7 +2827,7 @@ Enterprise systems often hit this issue when notifications, logging, or auditing
 ✅ No if‑else
 ✅ Subject is decoupled
 
-6️⃣ Observer vs Strategy vs State (important)
+### 6️⃣ Observer vs Strategy vs State (important)
         
         Pattern	    Purpose
         Observer	Notify dependents
@@ -2841,7 +2837,7 @@ Enterprise systems often hit this issue when notifications, logging, or auditing
 #### Key interview line:
 **Observer is about notification, Strategy is about selection, State is about behavior evolution.**
 
-7️⃣ Observer in Java & Spring (VERY IMPORTANT)
+### 7️⃣ Observer in Java & Spring (VERY IMPORTANT)
 #### Java built‑in example
 - java.util.Observer (deprecated)
 - Observable (deprecated)
@@ -2869,7 +2865,7 @@ Example:
 
 Enterprise event systems are textbook Observer implementations
 
-8️⃣ Real‑world enterprise use cases
+### 8️⃣ Real‑world enterprise use cases
 - Order status notifications
 - Audit logging
 - Cache invalidation
@@ -2879,14 +2875,14 @@ Enterprise event systems are textbook Observer implementations
 
 These scenarios are repeatedly cited in enterprise design‑pattern materials as Observer use cases
 
-9️⃣ When should you use Observer?
+### 9️⃣ When should you use Observer?
 #### Use Observer when:
 - Multiple components react to an event
 - Loose coupling is required
 - Event‑driven design fits
 - You want easy extensibility
 
-🔟 When NOT to use Observer
+### 🔟 When NOT to use Observer
 #### Avoid Observer when:
 - Only one dependent exists
 - Notification logic is simple
@@ -2903,15 +2899,14 @@ These scenarios are repeatedly cited in enterprise design‑pattern materials as
 
 
 ## Chain of Responsibility Design Pattern (Java)
-1️⃣ What is the Chain of Responsibility Pattern?
+### 1️⃣ What is the Chain of Responsibility Pattern?
 - The Chain of Responsibility (CoR) is a behavioral design pattern that:
-    Allows a request to be passed along a chain of handlers, where each handler decides either to process the request or pass it to the next handler.
+    **Allows a request to be passed along a chain of handlers, where each handler decides either to process the request or pass it to the next handler.**
 - In simple words:
     **Multiple objects get a chance to handle a request—without the sender knowing who will handle it.**
+- This intent is explicitly described in standard design‑pattern explanations of Chain of Responsibility as a way to decouple senders from receivers by chaining handlers
 
-This intent is explicitly described in standard design‑pattern explanations of Chain of Responsibility as a way to decouple senders from receivers by chaining handlers
-
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 📝 Office approval process
 - Team Lead
@@ -2925,7 +2920,7 @@ A request:
 
 👉 The request flows through a chain.
 
-3️⃣ What problem does Chain of Responsibility solve?
+### 3️⃣ What problem does Chain of Responsibility solve?
 #### Problem without CoR (hard‑coded logic)
 
         if (amount < 1000) {
@@ -2955,14 +2950,14 @@ Design‑pattern guides often highlight this if‑else explosion as the key moti
 ✅ Easy extension
 ✅ Clean pipeline
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Client → Handler1 → Handler2 → Handler3
 Each handler:
 - Knows only about the next handler
 - Implements a common interface
 
-5️⃣ Classic Java Example (Expense Approval – Very Practical)
+### 5️⃣ Classic Java Example (Expense Approval – Very Practical)
 #### Step 1: Request object
 
         public class Expense {
@@ -3038,7 +3033,7 @@ Director
 ✅ Client doesn’t know who approved
 ✅ Chain handles it automatically
 
-6️⃣ Chain of Responsibility vs Strategy vs Observer
+### 6️⃣ Chain of Responsibility vs Strategy vs Observer
 
         Pattern	                    Purpose
         Chain of Responsibility	    Pass request along handlers
@@ -3048,7 +3043,7 @@ Director
 #### Key interview line:
 **Chain passes a request sequentially; Strategy selects one handler; Observer notifies many.**
 
-7️⃣ Chain of Responsibility in Java & Spring (VERY IMPORTANT)
+### 7️⃣ Chain of Responsibility in Java & Spring (VERY IMPORTANT)
 - Java Core APIs
     - Servlet Filters
     - Logging frameworks (log levels chain)
@@ -3069,7 +3064,7 @@ Example (conceptual):
     - Passes it forward
 - These frameworks are classic, real‑world implementations of Chain of Responsibility
 
-8️⃣ Real‑world enterprise use cases
+### 8️⃣ Real‑world enterprise use cases
 - Request validation
 - Authentication & authorization
 - Approval workflows
@@ -3079,14 +3074,14 @@ Example (conceptual):
 
 Enterprise coding guidelines consistently mention CoR for such sequential processing scenarios
 
-9️⃣ When should you use Chain of Responsibility?
+### 9️⃣ When should you use Chain of Responsibility?
 #### Use CoR when:
 - Multiple handlers may process a request
 - Order of processing matters
 - You want loose coupling
 - Handlers may change dynamically
 
-🔟 When NOT to use Chain of Responsibility
+### 🔟 When NOT to use Chain of Responsibility
 #### Avoid CoR when:
 - Only one handler exists
 - Request must be handled by a specific object
@@ -3103,9 +3098,9 @@ Enterprise coding guidelines consistently mention CoR for such sequential proces
 
 
 ## Template Method Design Pattern (Java)
-1️⃣ What is the Template Method Design Pattern?
+### 1️⃣ What is the Template Method Design Pattern?
 - The Template Method Pattern is a behavioral design pattern that:
-    Defines the skeleton of an algorithm in a base class and lets subclasses override specific steps without changing the overall structure.
+    **Defines the skeleton of an algorithm in a base class and lets subclasses override specific steps without changing the overall structure.**
 - In simple words:
     **The parent class defines how something is done, subclasses decide which steps vary.**
 
@@ -3113,7 +3108,7 @@ Enterprise coding guidelines consistently mention CoR for such sequential proces
 ✅ Steps are customizable
 ✅ Prevents duplication
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 ☕ Making Tea vs Coffee
 - Steps (same structure):
@@ -3126,7 +3121,7 @@ Only brewing and condiments differ.
 
 👉 The recipe structure is fixed → Template Method
 
-3️⃣ What problem does Template Method solve?
+### 3️⃣ What problem does Template Method solve?
 #### Problem without Template Method
 
         makeTea() {
@@ -3157,7 +3152,7 @@ Only brewing and condiments differ.
 ✅ Consistent flow
 ✅ Controlled customization
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
     Template Method (final)
     ├── step1()  ✅ common
@@ -3168,7 +3163,7 @@ Only brewing and condiments differ.
 - Abstract methods → implemented by subclasses
 - Hooks → optional customization points
 
-5️⃣ Classic Java Example (Beverage Preparation)
+### 5️⃣ Classic Java Example (Beverage Preparation)
 #### Step 1: Abstract class (Template)
 
         public abstract class Beverage {
@@ -3231,7 +3226,7 @@ Only brewing and condiments differ.
 ✅ Different implementations
 ✅ No duplication
 
-6️⃣ Hooks (Optional but IMPORTANT)
+### 6️⃣ Hooks (Optional but IMPORTANT)
 
 Hooks allow subclasses to optionally override behavior.
 
@@ -3244,7 +3239,7 @@ Used when:
 - Default behavior is fine
 - Subclass may override
 
-7️⃣ Template Method vs Strategy (COMMON CONFUSION)
+### 7️⃣ Template Method vs Strategy (COMMON CONFUSION)
 
         Aspect	            Template Method	        Strategy
         Pattern type	    Behavioral	            Behavioral
@@ -3255,7 +3250,7 @@ Used when:
 #### Key interview line:
 **Template Method uses inheritance; Strategy uses composition.**
 
-8️⃣ Template Method in Java & Spring (VERY IMPORTANT)
+### 8️⃣ Template Method in Java & Spring (VERY IMPORTANT)
 - Java Core APIs
     - AbstractList
     - AbstractSet
@@ -3279,7 +3274,7 @@ Example:
 ✅ Framework controls flow
 ✅ You customize steps
 
-9️⃣ Real‑world enterprise use cases
+### 9️⃣ Real‑world enterprise use cases
 - Batch processing pipelines
 - ETL workflows
 - File processing
@@ -3287,7 +3282,7 @@ Example:
 - Framework extension points
 - Validation processes
 
-🔟 When should you use Template Method?
+### 🔟 When should you use Template Method?
 #### Use it when:
 - Algorithm structure is fixed
 - Some steps vary
@@ -3305,21 +3300,19 @@ Example:
     - Defines algorithm skeleton
     - Allows step customization
     - Promotes reuse & consistency
-
 - One‑line definition
     - **“Template Method defines the structure of an algorithm and lets subclasses implement the details.”**
 
 
 ## Iterator Design Pattern (Java)
-1️⃣ What is the Iterator Design Pattern?
+### 1️⃣ What is the Iterator Design Pattern?
 - The Iterator Pattern is a behavioral design pattern that:
-    Provides a way to access the elements of a collection sequentially without exposing its underlying representation.
+    **Provides a way to access the elements of a collection sequentially without exposing its underlying representation.**
 - In simple words:
     **Traverse a collection without knowing how it is stored internally.**
+- This definition aligns with how the Iterator pattern is categorized and explained in Java behavioral‑pattern references, where traversal logic is separated from collection structure
 
-This definition aligns with how the Iterator pattern is categorized and explained in Java behavioral‑pattern references, where traversal logic is separated from collection structure
-
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 📺 TV remote control
 - You press Next
@@ -3329,7 +3322,7 @@ This definition aligns with how the Iterator pattern is categorized and explaine
 👉 Remote = Iterator
 👉 Channel list = Collection
 
-3️⃣ What problem does Iterator solve?
+### 3️⃣ What problem does Iterator solve?
 #### Problem without Iterator
 Client code depends on internal structure:
 
@@ -3354,7 +3347,7 @@ These problems are highlighted in Iterator pattern explanations as the motivatio
 ✅ Clean traversal
 ✅ Unified access
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Client → Iterator → Collection
 
@@ -3362,7 +3355,7 @@ These problems are highlighted in Iterator pattern explanations as the motivatio
 - Collection focuses on storage
 - Client depends only on iterator interface
 
-5️⃣ Classic Java Example (Custom Collection)
+### 5️⃣ Classic Java Example (Custom Collection)
 #### Step 1: Iterator interface
 
         public interface Iterator<T> {
@@ -3413,7 +3406,7 @@ These problems are highlighted in Iterator pattern explanations as the motivatio
 ✅ Client doesn’t know array details
 ✅ Traversal logic encapsulated
 
-6️⃣ Iterator in Java (VERY IMPORTANT)
+### 6️⃣ Iterator in Java (VERY IMPORTANT)
 
 Java uses Iterator pattern everywhere:
 - java.util.Iterator
@@ -3432,7 +3425,7 @@ Internally:
 
 This is a textbook Iterator pattern implementation in Java APIs
 
-7️⃣ Iterator vs Composite vs Visitor (quick clarity)
+### 7️⃣ Iterator vs Composite vs Visitor (quick clarity)
 
         Pattern	        Purpose
         Iterator	    Traverse collection
@@ -3442,7 +3435,7 @@ This is a textbook Iterator pattern implementation in Java APIs
 #### Key interview line:
 **Iterator is about traversal, not structure or behavior.**
 
-8️⃣ Real‑world enterprise use cases
+### 8️⃣ Real‑world enterprise use cases
 - Traversing result sets
 - Paging through data
 - Streaming data processing
@@ -3451,14 +3444,14 @@ This is a textbook Iterator pattern implementation in Java APIs
 
 Enterprise Java courses and behavioral‑pattern catalogs explicitly list Iterator as a core pattern for safe traversal
 
-9️⃣ When should you use Iterator?
+### 9️⃣ When should you use Iterator?
 #### Use Iterator when:
 - You want to hide internal data structure
 - Multiple traversal strategies may exist
 - Clean, uniform traversal is required
 - Collection internals may change
 
-🔟 When NOT to use Iterator
+### 🔟 When NOT to use Iterator
 #### Avoid Iterator when:
 - Collection is trivial
 - Direct access is acceptable
@@ -3475,15 +3468,15 @@ Enterprise Java courses and behavioral‑pattern catalogs explicitly list Iterat
 
 
 ## Interpreter Design Pattern
-1️⃣ What is the Interpreter Design Pattern?
+### 1️⃣ What is the Interpreter Design Pattern?
 - The Interpreter Pattern is a behavioral design pattern that:
-    Defines a representation for a grammar and provides an interpreter to evaluate sentences in that grammar.
+    **Defines a representation for a grammar and provides an interpreter to evaluate sentences in that grammar.**
 - In simple words:
     **It lets you interpret or evaluate expressions written in a simple language.**
 - Think of it as:
-    “Build a mini language + an engine to evaluate it.”
+    **“Build a mini language + an engine to evaluate it.”**
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 🧮 Calculator
 
@@ -3496,7 +3489,7 @@ Expression:
 
 👉 The calculator interprets the expression.
 
-3️⃣ What problem does Interpreter solve?
+### 3️⃣ What problem does Interpreter solve?
 #### Problem without Interpreter
 - Suppose you support dynamic rules:
     - "A AND B"
@@ -3518,7 +3511,7 @@ Expression:
 ✅ Readable
 ✅ Rule‑driven design
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Expression → interpret(context)
 
@@ -3528,7 +3521,7 @@ Where:
 - NonTerminalExpression → combines expressions
 - Context → input data
 
-5️⃣ Structure of Interpreter Pattern
+### 5️⃣ Structure of Interpreter Pattern
     
         Role	                Responsibility
         Expression	            Declares interpret()
@@ -3537,7 +3530,7 @@ Where:
         Context     	        Holds input / variables
         Client	                Builds and evaluates expression tree
         
-6️⃣ Classic Java Example (Boolean Expression Language)
+### 6️⃣ Classic Java Example (Boolean Expression Language)
 Scenario - Evaluate expressions like:
 
         A AND B
@@ -3619,13 +3612,13 @@ Step 4: Client usage
 ✅ Recursive interpretation
 ✅ Grammar‑based evaluation
 
-7️⃣ Why this is powerful ✅
+### 7️⃣ Why this is powerful ✅
 - Rules are objects
 - Grammar is extensible
 - Easy to add new operators
 - No complex parsing logic in client
 
-8️⃣ Interpreter vs Strategy vs Visitor (common confusion)
+### 8️⃣ Interpreter vs Strategy vs Visitor (common confusion)
 
         Pattern	        Purpose
         Interpreter	    Evaluate grammar / expressions
@@ -3635,7 +3628,7 @@ Step 4: Client usage
 #### Key interview line:
 **Interpreter is for language parsing; Strategy is for algorithm selection.**
 
-9️⃣ Real‑world Java & enterprise use cases
+### 9️⃣ Real‑world Java & enterprise use cases
 - Rule engines
     - Discount rules
     - Validation rules
@@ -3650,7 +3643,7 @@ Step 4: Client usage
     - Regex engines
     - Expression languages (SpEL conceptually)
 
-🔟 When should you use Interpreter?
+### 🔟 When should you use Interpreter?
 #### Use Interpreter when:
 - Grammar is small & stable
 - Rules change frequently
@@ -3675,14 +3668,14 @@ Step 4: Client usage
 
 
 ## Command Design Pattern (Java)
-1️⃣ What is the Command Design Pattern?
+### 1️⃣ What is the Command Design Pattern?
 - The Command Pattern is a behavioral design pattern that:
-    Encapsulates a request as an object, thereby allowing you to parameterize clients with different requests, queue or log them, and support undo/redo operations.
+    **Encapsulates a request as an object, thereby allowing you to parameterize clients with different requests, queue or log them, and support undo/redo operations.**
 - In simple words:
     **Turn a request into an object.**
 - This intent is explicitly described in design‑pattern references and courses that introduce Command as a way to decouple the sender of a request from the object that executes it
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 🎮 Remote control
 
@@ -3693,7 +3686,7 @@ Step 4: Client usage
 The remote doesn’t know how the TV works.
 It just sends a command.
 
-3️⃣ What problem does Command solve?
+### 3️⃣ What problem does Command solve?
 #### Problem without Command (tight coupling)
 
         button.click() {
@@ -3717,7 +3710,7 @@ These drawbacks are commonly cited as motivations for introducing the Command pa
 ✅ Easy extension
 ✅ Supports undo / redo / queues
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Client → Command → Receiver
                 ↑
@@ -3728,7 +3721,7 @@ These drawbacks are commonly cited as motivations for introducing the Command pa
 - Invoker → triggers command
 - Receiver → performs actual logic
 
-5️⃣ Classic Java Example (Light ON/OFF)
+### 5️⃣ Classic Java Example (Light ON/OFF)
 #### Step 1: Command interface
 
         public interface Command {
@@ -3804,7 +3797,7 @@ These drawbacks are commonly cited as motivations for introducing the Command pa
 ✅ Invoker is decoupled
 ✅ Commands are interchangeable
 
-6️⃣ Undo / Redo support (KEY FEATURE)
+### 6️⃣ Undo / Redo support (KEY FEATURE)
 
         public interface Command {
             void execute();
@@ -3815,7 +3808,7 @@ Commands store previous state → enables undo / redo.
 
 This capability is one of the most cited advantages of the Command pattern in design‑pattern literature
 
-7️⃣ Command vs Strategy vs Chain of Responsibility
+### 7️⃣ Command vs Strategy vs Chain of Responsibility
 
         Pattern	                    Purpose
         Command	                    Encapsulate a request
@@ -3825,7 +3818,7 @@ This capability is one of the most cited advantages of the Command pattern in de
 #### Key interview line:
 **Command encapsulates a request; Strategy encapsulates an algorithm.**
 
-8️⃣ Command in real Java & Spring systems (VERY IMPORTANT)
+### 8️⃣ Command in real Java & Spring systems (VERY IMPORTANT)
 - Java examples
     - Runnable (command with run())
     - Callable
@@ -3841,14 +3834,14 @@ This idea is explicitly mentioned in enterprise CQRS documentation where command
     - Kafka commands
     - Event‑driven command handlers
 
-9️⃣ When should you use Command?
+### 9️⃣ When should you use Command?
 #### Use Command when:
 - You need undo/redo
 - Requests must be queued or logged
 - UI actions vary
 - You want loose coupling
 
-🔟 When NOT to use Command
+### 🔟 When NOT to use Command
 #### Avoid Command when:
 - Logic is trivial
 - Only one action exists
@@ -3864,16 +3857,15 @@ This idea is explicitly mentioned in enterprise CQRS documentation where command
     - **“Command turns a request into an object.”**
 
 ## Visitor Design Pattern
-1️⃣ What is the Visitor Design Pattern?
+### 1️⃣ What is the Visitor Design Pattern?
 - The Visitor Pattern is a behavioral design pattern that:
-    Allows you to add new operations to a group of related objects without modifying their classes.
+    **Allows you to add new operations to a group of related objects without modifying their classes.**
 - In simple words:
     **Move operations out of objects into a separate “visitor” class.**
+- This is the key idea highlighted in behavioral‑pattern references that describe Visitor as separating algorithms from the object structure they operate on
 
-This is the key idea highlighted in behavioral‑pattern references that describe Visitor as separating algorithms from the object structure they operate on
 
-
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 🏥 Doctor visiting patients
 
@@ -3888,7 +3880,7 @@ Instead of putting doctor logic inside patients, the doctor visits patients.
 👉 Patients stay unchanged
 👉 New operations = new doctors
 
-3️⃣ What problem does Visitor solve?
+### 3️⃣ What problem does Visitor solve?
 #### Problem without Visitor
 You have a stable object structure:
 
@@ -3914,7 +3906,7 @@ Behavioral pattern courses describe this as the classic case where adding operat
 ✅ Closed for modification
 ✅ Clean separation of concerns
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Visitor → Element.accept(visitor)
                             ↓
@@ -3924,7 +3916,7 @@ Behavioral pattern courses describe this as the classic case where adding operat
 - Visitors implement operations
 - Double dispatch decides behavior
 
-5️⃣ Structure of Visitor Pattern
+### 5️⃣ Structure of Visitor Pattern
         
         Role	            Responsibility
         Visitor	            Declares visit methods
@@ -3935,7 +3927,7 @@ Behavioral pattern courses describe this as the classic case where adding operat
 
 This structure is consistently described in Visitor pattern references
 
-6️⃣ Classic Java Example (Shape Processing)
+### 6️⃣ Classic Java Example (Shape Processing)
 #### Step 1: Visitor interface
 
         public interface ShapeVisitor {
@@ -3988,14 +3980,14 @@ This structure is consistently described in Visitor pattern references
 ✅ No shape modification
 ✅ New operation via visitor
 
-7️⃣ Why Visitor uses double dispatch (INTERVIEW POINT)
+### 7️⃣ Why Visitor uses double dispatch (INTERVIEW POINT)
 - Method chosen depends on:
     - Object type
     - Visitor type
 
 This allows correct method selection at runtime.
 
-8️⃣ Visitor vs Strategy vs Interpreter
+### 8️⃣ Visitor vs Strategy vs Interpreter
 
         Pattern	        Purpose
         Visitor	        Add operations
@@ -4005,7 +3997,7 @@ This allows correct method selection at runtime.
 #### Key interview line:
 **Visitor adds new behavior without changing existing classes.**
 
-9️⃣ Real‑world Java & enterprise use cases
+### 9️⃣ Real‑world Java & enterprise use cases
 - Compilers & AST processing
 - Report generation
 - Object structure traversal
@@ -4014,7 +4006,7 @@ This allows correct method selection at runtime.
 
 Visitor is commonly referenced in tooling, compilers, and framework internals where object structures are stable but operations change
 
-🔟 When should you use Visitor? ✅
+### 🔟 When should you use Visitor? ✅
 #### Use Visitor when:
 - Object structure is stable
 - You frequently add new operations
@@ -4037,14 +4029,14 @@ Visitor is commonly referenced in tooling, compilers, and framework internals wh
 
 
 ## Mediator Design Pattern
-1️⃣ What is the Mediator Design Pattern?
+### 1️⃣ What is the Mediator Design Pattern?
 - The Mediator Pattern is a behavioral design pattern that:
-    Defines an object that encapsulates how a set of objects interact, promoting loose coupling by preventing objects from referring to each other explicitly.
+    **Defines an object that encapsulates how a set of objects interact, promoting loose coupling by preventing objects from referring to each other explicitly.**
 - In simple words:
     **Objects don’t talk to each other directly — they talk through a mediator.**
 - This definition aligns with standard explanations of the Mediator pattern as a way to centralize and manage communication between multiple objects
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 ✈️ Air traffic control
 - Planes do NOT communicate with each other
@@ -4053,7 +4045,7 @@ Visitor is commonly referenced in tooling, compilers, and framework internals wh
 👉 Control tower = Mediator
 👉 Planes = Colleagues
 
-3️⃣ What problem does Mediator solve?
+### 3️⃣ What problem does Mediator solve?
 #### Problem without Mediator (many‑to‑many chaos)
 
     button.notify(textBox);
@@ -4077,7 +4069,7 @@ Enterprise design‑pattern discussions explicitly cite this “many‑to‑many
 ✅ Centralized communication
 ✅ Easier maintenance
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Colleague → Mediator ← Colleague
 
@@ -4085,7 +4077,7 @@ Enterprise design‑pattern discussions explicitly cite this “many‑to‑many
 - Mediator knows all colleagues
 - Interaction logic lives in one place
 
-5️⃣ Structure of Mediator Pattern
+### 5️⃣ Structure of Mediator Pattern
 
         Role	            Responsibility
         Mediator	        Defines communication interface
@@ -4095,7 +4087,7 @@ Enterprise design‑pattern discussions explicitly cite this “many‑to‑many
 
 This structure is consistently described in Mediator pattern references
 
-6️⃣ Classic Java Example (Chat Room)
+### 6️⃣ Classic Java Example (Chat Room)
 #### Step 1: Mediator interfac
 
         public interface ChatMediator {
@@ -4173,7 +4165,7 @@ This structure is consistently described in Mediator pattern references
 ✅ Users are decoupled
 ✅ Mediator controls interaction
 
-7️⃣ Mediator vs Observer vs Command (important)
+### 7️⃣ Mediator vs Observer vs Command (important)
         Pattern	Purpose
         Mediator	Coordinate interactions
         Observer	Notify dependents
@@ -4182,7 +4174,7 @@ This structure is consistently described in Mediator pattern references
 #### Key interview line:
 **Mediator centralizes communication; Observer broadcasts events.**
 
-8️⃣ Mediator in Java & Spring (VERY IMPORTANT)
+### 8️⃣ Mediator in Java & Spring (VERY IMPORTANT)
 - Java examples
     - GUI frameworks (Swing dialogs)
     - Chat servers
@@ -4195,14 +4187,14 @@ This structure is consistently described in Mediator pattern references
 
 Pattern references and enterprise discussions often mention these scenarios as ideal for Mediator
 
-9️⃣ When should you use Mediator? ✅
+### 9️⃣ When should you use Mediator? ✅
 #### Use Mediator when:
 - Many objects interact heavily
 - Dependencies become complex
 - Central coordination is needed
 - Loose coupling is required
 
-🔟 When NOT to use Mediator ❌
+### 🔟 When NOT to use Mediator ❌
 #### Avoid Mediator when:
 - Only few objects interact
 - Mediator becomes a “god class”
@@ -4218,14 +4210,14 @@ Pattern references and enterprise discussions often mention these scenarios as i
     - **“Mediator encapsulates how objects interact.”**
 
 ## Memento Design Pattern (Java)
-1️⃣ What is the Memento Design Pattern?
+### 1️⃣ What is the Memento Design Pattern?
 - The Memento Pattern is a behavioral design pattern that:
-    Captures and externalizes an object’s internal state so that it can be restored later, without violating encapsulation.
+    **Captures and externalizes an object’s internal state so that it can be restored later, without violating encapsulation.**
 - In simple words:
     **Save an object’s state and restore it later — without exposing its internals.**
 - This intent is explicitly described in behavioral‑pattern references that group Memento with patterns like Command, Mediator, and State for managing object behavior and lifecycle
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 💾 Undo / Redo in an editor
 
@@ -4237,7 +4229,7 @@ Pattern references and enterprise discussions often mention these scenarios as i
 👉 Editor = Originator
 👉 Undo manager = Caretaker
 
-3️⃣ What problem does Memento solve?
+### 3️⃣ What problem does Memento solve?
 #### Problem without Memento
 
         editor.saveState();
@@ -4260,7 +4252,7 @@ Behavioral design courses explicitly mention that restoring state directly break
 ✅ Clean undo/redo
 ✅ Safe rollback
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         Originator → Memento ← Caretaker
 
@@ -4268,7 +4260,7 @@ Behavioral design courses explicitly mention that restoring state directly break
 - Memento → snapshot of state
 - Caretaker → manages snapshots
 
-5️⃣ Structure of Memento Pattern
+### 5️⃣ Structure of Memento Pattern
         
         Role	    Responsibility
         Originator	Creates & restores mementos
@@ -4277,7 +4269,7 @@ Behavioral design courses explicitly mention that restoring state directly break
 
 This structure is consistently described in Memento pattern references
 
-6️⃣ Classic Java Example (Text Editor – Very Practical)
+### 6️⃣ Classic Java Example (Text Editor – Very Practical)
 #### Step 1: Memento
 
         public class EditorMemento {
@@ -4349,7 +4341,7 @@ This structure is consistently described in Memento pattern references
 ✅ No internal exposure
 ✅ Clean undo
 
-7️⃣ Memento vs State vs Command (IMPORTANT)
+### 7️⃣ Memento vs State vs Command (IMPORTANT)
         
         Pattern	    Purpose
         Memento	    Save & restore state
@@ -4359,7 +4351,7 @@ This structure is consistently described in Memento pattern references
 #### Key interview line:
 **Memento stores state; State represents behavior.**
 
-8️⃣ Memento in real Java & enterprise systems
+### 8️⃣ Memento in real Java & enterprise systems
 - Common use cases
     - Undo / redo functionality
     - Transaction rollback
@@ -4374,14 +4366,14 @@ Behavioral‑pattern courses explicitly list undo/redo and rollback as the prima
     - Used with Caretaker history
     - Used in editors, IDEs, workflows
 
-9️⃣ When should you use Memento?
+### 9️⃣ When should you use Memento?
 #### Use Memento when:
 - State must be restored later
 - Encapsulation is critical
 - Undo/redo is required
 - Rollback functionality is needed
 
-🔟 When NOT to use Memento
+### 🔟 When NOT to use Memento
 #### Avoid Memento when:
 - Object state is huge
 - Performance/memory overhead is high
@@ -4399,15 +4391,15 @@ Behavioral‑pattern courses explicitly list undo/redo and rollback as the prima
     - **“Memento captures and restores an object’s state without exposing internals.”**
 
 ## Null Object Design Pattern
-1️⃣ What is the Null Object Design Pattern?
+### 1️⃣ What is the Null Object Design Pattern?
 - The Null Object Pattern is a behavioral design pattern that:
-    Provides a non‑functional default object instead of using null, so client code does not need to perform null checks.
+    **Provides a non‑functional default object instead of using null, so client code does not need to perform null checks.**
 - In simple words:
     **Replace null with an object that does nothing.**
 - This pattern is consistently described in design‑pattern references as a way to eliminate null checks and conditional logic by introducing a safe default object
 
 
-2️⃣ Real‑world analogy (easy to remember)
+### 2️⃣ Real‑world analogy (easy to remember)
 
 📺 Mute button on TV
 
@@ -4416,7 +4408,7 @@ Behavioral‑pattern courses explicitly list undo/redo and rollback as the prima
 
 👉 Muted speaker = Null Object
 
-3️⃣ What problem does Null Object solve?
+### 3️⃣ What problem does Null Object solve?
 #### Problem without Null Object
 
         if (logger != null) {
@@ -4442,7 +4434,7 @@ Enterprise codebases often suffer from excessive defensive null checks, which th
 ✅ No null checks
 ✅ Safer execution
 
-4️⃣ Core idea (mental model)
+### 4️⃣ Core idea (mental model)
 
         RealObject implements Interface
         NullObject implements Interface (does nothing)
@@ -4459,7 +4451,7 @@ Client depends only on interface, never checks for null.
 
 This structure is highlighted in behavioral‑pattern explanations that classify Null Object as a safer alternative to null references
 
-6️⃣ Classic Java Example (Logger – Very Practical)
+### 6️⃣ Classic Java Example (Logger – Very Practical)
 #### Step 1: Interface
 
         public interface Logger {
@@ -4491,7 +4483,7 @@ This structure is highlighted in behavioral‑pattern explanations that classify
 ✅ Clean code
 ✅ Safe execution
 
-7️⃣ Another Real Example (User Role)
+### 7️⃣ Another Real Example (User Role)
 
         User user = userService.getUser(id);
         user.getRole().access(); // no null check
@@ -4509,7 +4501,7 @@ Where:
 #### Key interview line:
 **Null Object avoids null checks by providing safe behavior.**
 
-9️⃣ Null Object in Java & enterprise systems
+### 9️⃣ Null Object in Java & enterprise systems
 - Java Core
     - Collections.emptyList()
     - Optional.empty() (conceptually similar)

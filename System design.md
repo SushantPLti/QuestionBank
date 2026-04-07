@@ -381,3 +381,39 @@ https://onedrive.live.com/view.aspx?resid=6B364628C29FEB52%21s9263727369a94fcd83
 
 75. Circuit Breaker Introduction
 https://onedrive.live.com/view.aspx?resid=6B364628C29FEB52%21s9263727369a94fcd83cbce0c0db8053c&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL28vYy82YjM2NDYyOGMyOWZlYjUyL0VuTnlZNUtwYWMxUGc4dk9EQTI0QlR3Qk5seWhEdlJlRWctS0RWWjdNZV9aWkE&wd=target%28New+Section+1.one%7C1c705580-121a-3746-9837-b97f7646a06a%2FCircuit+Breaker+Fault-Tolerant+Microservice+%28Part-%7Caff21d09-7e7c-4a43-b09c-50e7a2c70e82%2F%29&wdorigin=703&wdpartid=%7B5058ad85-08d9-b107-24e5-0d85cd4fee1d%7D%7B1%7D&wdsectionfileid=6b364628c29feb52%21s1965afa38c4142d88d16f8c0aad11692
+
+
+
+
+@startuml
+actor "Upstream System" as Upstream
+participant "Kafka Topic\n(instruction.mt304.fx.settle)" as KafkaIn
+participant "InboundMt304Flow\n(Spring Integration)" as Flow
+participant "AutoFxSettleService" as FXService
+database "Database" as DB
+participant "Kafka Topic\n(instruction.a4.out.xml.swift.ack)" as KafkaAck
+participant "Downstream FX Service" as FXDownstream
+participant "Kafka Topic\n(instruction.response.json.inbound.fx.settle)" as KafkaAck
+participant "Service Activator\n(processFXSettleInboundResponse)" as RespHandler
+
+== MT304 Inbound==
+Upstream -> KafkaIn : Send MT304 (CashInstruction)
+KafkaIn -> Flow : Deliver MT304 message
+
+== Processing ==
+Flow -> FXService : createInstructionWithMt304(request)
+FXService -> DB : Persist MT304 instruction
+FXService <- DB : Ack/Result
+
+Flow -> KafkaAck : SEnd CashInstructionAcknowledgement
+
+== Downstream processing ==
+FXService -> FXDownstream : (if needed) Trigger FX settlement
+
+FXDownstream -> KakfaResp : Send FXSettleMessageResponse
+KafkaResp -> RespHandler : Deliver FX Settle response
+
+RespHandler -> FXService : processFXSettleInboundResponse(response)
+FXService -> DB : Update instruction status, etc
+
+@endUml

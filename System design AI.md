@@ -1,3 +1,44 @@
+## Low Level Design(LLD)
+
+- It majorly focuses on classes and objects within a system
+- HLD -> LLD -> Actual code
+
+### Goals
+- To write the clean code
+- Code should be flexible and maintanable
+- Code should be easy to test
+
+### Categories
+- Creational: Controls the object creation
+    - Singleton
+    - Builder
+    - Factory
+    - Abstract Factory
+    - Object Pool
+    - Prototype
+- Structural: It focuses on, how different classes/objects are arranged together so that larger problem can be solved in most flexible way
+    - Decorator
+    - Proxy
+    - Composite
+    - Adapter
+    - Bridge
+    - Facade
+    - Flyweight
+- Behavioral: it focuses on, how different objects communicate or interact with each other.(In other words, with above structural pattern we created the skeleton of the system but how the skeleton behaves like coordination, responsibility, interaction is all guided by behavioral pattern)
+    - State
+    - Strategy
+    - Observer
+    - Chain of responsibility
+    - Template
+    - Iterator
+    - Interpreter
+    - Command
+    - Visitor
+    - Mediator
+    - Memento
+    - Null object
+
+
 ## Singleton design pattern
 
 ### 1️⃣ What is the Singleton Design Pattern? 
